@@ -1,17 +1,17 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
+import { Maven_Pro } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] })
+const mavemPro = Maven_Pro({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Projeto Algoritmo',
-  description: 'Projeto Algoritmo EDM',
-}
+  title: 'EDM Project',
+  description: 'Improved Differential Evolution Project',
+} 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>{children}</body>
+      <body className={mavemPro.className}>{children}</body>
     </html>
   )
 }

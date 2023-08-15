@@ -1,0 +1,8 @@
+{
+    "springs":{
+        "title": "Problema das Molas",
+        "data": {
+            "dimension": {"value": 2, "disabled": true}
+        }
+    }
+}

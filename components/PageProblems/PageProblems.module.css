@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
+
+.page_problem_box{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 50px 0px;
+}
+
+.title_problem{
+    font-size: 26px;
+    text-align: center;
+}
+
+.confg_title_box{
+    display: flex;
+    max-width: 700px;
+    padding: 55px 40px 0px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.confg_title_box h4{
+    color: var(--color-text-3);
+    font-weight: 500;
+}
+
+.confg_title_box .stroke{
+    display: flex;
+    position: relative;
+    flex: 1;
+}
+
+.confg_title_box .stroke::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    max-width: 90px;
+    height: 1px;
+    background-color: var(--color-stroke);
+    border-radius: 2px;
+}
+
+.button_run_box{
+    padding: 60px 15px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button_run_box > button{
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    display: flex;
+    justify-content: center;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+    align-items: center;
+    outline: none;
+    border: none;
+    user-select: none;
+    touch-action: manipulation;
+    font-family: 'Maven Pro', sans-serif;
+    color: var(--background-color-1);
+    background-color: var(--color-blue-2);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 30px;
+}
+
+.button_run_box > button span {
+    transition: all 200ms;
+}
+  
+.button_run_box > button:hover span {
+    transform: scale(.9);
+    opacity: .85;
+}

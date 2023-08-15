@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro:wght@400;500;600;700;800;900&display=swap');
+
+.input_box{
+    display: flex;
+    flex-direction: column;
+    max-width: 280px;
+    gap: 8px;
+    width: 100%;
+}
+
+.header_input_box{
+    padding-left: 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.label_box{
+    display: flex;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 6px;
+}
+
+.letter_label{
+    font-weight: 800;
+    color: var(--color-blue-2);
+}
+
+.min_label{
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.input{
+    font-family: 'Maven Pro', sans-serif;
+    border-radius: 8px;
+    background-color: transparent;
+    padding: 7px 12px;
+    font-weight: 600;
+    transition: 200ms;
+    border: 2px solid rgba(82, 82, 83, 0.50);
+    color: var(--color-text-2);
+    outline: none;
+}
+
+.input:focus, .input:hover{
+    border: 2px solid var(--color-blue-1);
+}

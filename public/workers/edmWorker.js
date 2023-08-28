@@ -1,5 +1,3 @@
-import { runningAlghoritm } from "../functions/edm/base";
-
 self.onmessage = function (e) {
   const { type, payload } = e.data;
   if (type === "runAlgorithm") {

@@ -5,11 +5,22 @@
     background-color: transparent;
     font-size: 20px;
     cursor: pointer;
-    color: var(--color-text-1);
+    color: var(--color-text-2);
     padding: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     left: 20px;
+    outline: none;
 }
 
+.icon_back_button{
+    position: absolute;
+    transition: opacity 100ms;
+    color: var(--color-text-2);
+    opacity: 0;
+}
+
+.back_button:hover .icon_back_button{
+    opacity: 1;
+}

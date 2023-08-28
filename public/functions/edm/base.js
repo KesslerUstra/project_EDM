@@ -3,19 +3,24 @@ import { sampleSize, cloneDeep } from 'lodash';
 import { resultFunction } from './resultFunction';
 
 export async function runningAlghoritm(data, limits){
-    let newPop = createPopulation(data, limits);
+
+    let results = [];
+
+    let newPop =  createPopulation(data, limits);
     console.log('population', newPop);
     newPop = orderSliceArray(false, newPop, data.points);
     console.log('pop', newPop);
     console.log('pop',betterPoint(newPop));
-    for (let stopp = 0; stopp < data.stop; stopp++) {
-      newPop = AlghoritmEDM(newPop, data, limits);
+    console.log('pop',data);
+    for (let stopp = 0; stopp < data.stop.genValue; stopp++) {
+      newPop = await AlghoritmEDM(newPop, data, limits);
+      results.push(betterPoint(newPop));
       console.log('pop',betterPoint(newPop));
     }
-    return betterPoint(newPop);
+    return results;
 }
 
-function AlghoritmEDM(pop, data, limits){
+async function AlghoritmEDM(pop, data, limits){
     let k = 0, g = 0, i = 1;
     let popChanges = cloneDeep(pop);
     for (k = 0; k < pop.length; k++) {
@@ -102,7 +107,7 @@ function actionVector(arry1, arry2, type, value = 1){
     return arryFinal;
 }
 
-function betterPoint(pop){
+export function betterPoint(pop){
     let arry = pop.flat().sort((a, b) => a.result - b.result);
     return arry;
 }

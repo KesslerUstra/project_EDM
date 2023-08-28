@@ -1,0 +1,78 @@
+.input_stop_box{
+    width: 100%;
+    max-width: 280px;
+}
+
+.header_box{
+    padding: 0px 0px 22px 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-end;
+}
+
+.label_box{
+    display: flex;
+    font-size: 15px;
+    font-weight: 600;
+    gap: 6px;
+}
+
+.letter_label{
+    font-weight: 800;
+    color: var(--color-blue-2);
+}
+
+.confg_stop_box{
+    display: flex;
+    flex-direction: column;
+    padding: 4px 4px 4px 40px;
+    gap: 20px;
+}
+
+.stop_box{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.header_stop{
+    cursor: pointer;
+    width: fit-content;
+    user-select: none;
+    margin-left: -8px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.checkbox_stop{
+    border-radius: 4px;
+    border: 2px solid var(--color-blue-2);
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    font-weight: bolder;
+    color: #fff;
+    font-size: 8px;
+    justify-content: center;
+}
+
+.checkbox_stop > svg{
+    display: none;
+}
+
+.activeCheck{
+    background-color: var(--color-blue-2);
+}
+
+.activeCheck > svg{
+    display: block;
+}
+
+.label_stop{
+    font-weight: 700;
+    font-size: 12px;
+    font-weight: 700;
+}

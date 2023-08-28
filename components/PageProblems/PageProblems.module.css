@@ -3,7 +3,7 @@
 .page_problem_box{
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 50px 0px;
+    padding: 50px 0px 80px;
 }
 
 .title_problem{
@@ -76,4 +76,8 @@
 .button_run_box > button:hover span {
     transform: scale(.9);
     opacity: .85;
+}
+
+.loading_button_run{
+    position: absolute;
 }

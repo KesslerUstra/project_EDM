@@ -2,12 +2,19 @@
 
 
   --background-color-1: #F8F9FE;
+  --background-color-2: #e2e2e64f;
+  --background-color-3: #e2e2e683;
+  --background-color-4: #8b9fbc21;
   --color-text-1: #232323;
   --color-text-2: #232323bf;
   --color-text-3: #232323a6;
   --color-stroke: #23232366;
+  --color-stroke-2: #548DE34A;
   --color-blue-1: #6CA6FE;
   --color-blue-2: #3277E0;
+  --color-blue-3: #7299d42c;
+  --color-blue-4: #3277E0CC;
+  
   
 
   --max-width: 1400px;

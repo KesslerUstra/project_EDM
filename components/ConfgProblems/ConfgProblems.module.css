@@ -74,14 +74,7 @@
     align-items: center;
     justify-content: center;
     align-self: stretch;
-    transition: all 200ms;
 }
-  
-.button_default_values:hover span {
-    transform: scale(.95);
-    opacity: .9;
-}
-
 
 .knobs,
 .layer {

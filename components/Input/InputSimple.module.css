@@ -47,3 +47,7 @@
 .input:focus, .input:hover{
     border: 2px solid var(--color-blue-1);
 }
+
+.input.error{
+    border: 2px solid var(--color-error-1);
+}

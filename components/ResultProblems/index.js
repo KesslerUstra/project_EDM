@@ -13,7 +13,7 @@ ChartJS.register(
 function ResultProblems({generations = [], data= {}}){
 
     const data2 = {
-        labels: [...Array(data.stop?.genValue).keys()].map(number => number + 1),
+        labels: [...Array(generations.length).keys()].map(number => number + 1),
         datasets: [{
             borderColor: '#6CA6FE',
             data: generations.length > 1 ?generations.map(e => e[0].result) : []

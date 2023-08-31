@@ -6,7 +6,7 @@ import InputStop from "../Input/InputStop";
 import styles from "./ConfgProblems.module.css";
 import { HiDocument } from "react-icons/hi2";
 
-function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLimits}){
+function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLimits, verification}){
 
     console.log(confgData);
     console.log(confgLimits);
@@ -49,12 +49,12 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
                 </div>
             </div>
             <div className={styles.confg_problem_box}>
-                <InputSimple value={confgData?.dimension?.value} disabled={confgData?.dimension?.disabled} letter={'n'} label={'Dimensão'} onChange={(e) => changeData('dimension', e.target.value)} type={'number'}/>
-                <InputSimple value={confgData?.groups} letter={'p'} label={'Número Conjunto'} onChange={(e) => changeData('groups', e.target.value)} type={'number'}/>
-                <InputSimple value={confgData?.points} letter={'m'} label={'Número de Pontos'} min={4} onChange={(e) => changeData('points', e.target.value)} type={'number'}/>
-                <InputLimits values={confgLimits} dimesion={confgData.dimension.value} onChangeLimits={changeDataLimits} />
-                <InputSimple value={confgData?.generations} letter={'Gmax'} label={'Número Gerações'} onChange={(e) => changeData('generations', e.target.value)} type={'number'}/>
-                <InputStop stopConfg={confgData.stop} onChangeStop={changeDataStop}/>
+                <InputSimple verification={verification.dimension} value={confgData?.dimension?.value} disabled={confgData?.dimension?.disabled} letter={'n'} label={'Dimensão'} onChange={(e) => changeData('dimension', e.target.value)} type={'number'}/>
+                <InputSimple verification={verification.groups} value={confgData?.groups} letter={'p'} label={'Número Conjunto'} onChange={(e) => changeData('groups', e.target.value)} type={'number'}/>
+                <InputSimple verification={verification.points} value={confgData?.points} letter={'m'} label={'Número de Pontos'} min={4} onChange={(e) => changeData('points', e.target.value)} type={'number'}/>
+                <InputLimits values={confgLimits} dimesion={confgData.dimension.value} onChangeLimits={changeDataLimits} verification={verification.limits} />
+                <InputSimple verification={verification.generations} value={confgData?.generations} letter={'Gmax'} label={'Número Gerações'} onChange={(e) => changeData('generations', e.target.value)} type={'number'}/>
+                <InputStop verifications={verification.stop} stopConfg={confgData.stop} onChangeStop={changeDataStop}/>
             </div>
         </>
     )

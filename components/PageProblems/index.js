@@ -10,6 +10,7 @@ import confgProblemsJson from '@/app/assets/json/confg_problems.json';
 import styles from './PageProblems.module.css';
 
 import { runningAlghoritm } from '@/public/functions/edm/base';
+import { verifyValuesConfiguration } from '@/public/functions/verifyValues';
 
 function PageProblems({confg = undefined}){
 
@@ -18,25 +19,18 @@ function PageProblems({confg = undefined}){
     const [data, setData] = useState(problemSelect.data);
     const [limits, setLimits] = useState({});
     const [loading, setLoading] = useState(false);
+    const [verifications, setVerifications] = useState({});
     const [results, setResults] = useState({});
 
     async function run(){
         try {
             setLoading(true);
+            let verification = verifyValuesConfiguration(data, limits);
+            console.log('verification', verification);
+            setVerifications(verification);
+            if(Object.keys(verification).length !== 0 ) return true;
             const result = await runningAlghoritm(data, limits);
             setResults(result)
-
-            // const worker = new Worker("/functions/edm/edmWorker.js", { type: "module" });
-    
-            // worker.onmessage = (e) => {
-            //     if (e.data.type === "algorithmResult") {
-            //         setResults(e.data.payload);
-            //         setLoading(false);
-            //     }
-            // };
-            
-            // worker.postMessage({ type: "runAlgorithm", payload: { data, limits } });
-            
         } catch (error) {
             console.error("Erro durante a execução do algoritmo:", error);
         }finally{
@@ -60,7 +54,7 @@ function PageProblems({confg = undefined}){
                     <h4>Configurações</h4>
                     <div className={styles.stroke}></div>
                 </div>
-                <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} />
+                <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} verification={verifications} />
                 <div className={styles.button_run_box}>
                     
                     <button style={loading ? {pointerEvents: 'none'} : {}} onClick={() => run()}>

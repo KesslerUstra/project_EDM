@@ -18,6 +18,7 @@ function PageProblems({confg = undefined}){
     
     const [data, setData] = useState(problemSelect.data);
     const [limits, setLimits] = useState({});
+    const [advanced, setAdvanced] = useState({});
     const [loading, setLoading] = useState(false);
     const [verifications, setVerifications] = useState({});
     const [results, setResults] = useState({});
@@ -25,7 +26,7 @@ function PageProblems({confg = undefined}){
     async function run(){
         try {
             setLoading(true);
-            let verification = verifyValuesConfiguration(data, limits);
+            let verification = verifyValuesConfiguration(data, limits, advanced);
             console.log('verification', verification);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return true;
@@ -54,7 +55,7 @@ function PageProblems({confg = undefined}){
                     <h4>Configurações</h4>
                     <div className={styles.stroke}></div>
                 </div>
-                <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} verification={verifications} />
+                <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} confgAdvanced={advanced} setAdvanced={setAdvanced} verification={verifications} />
                 <div className={styles.button_run_box}>
                     
                     <button style={loading ? {pointerEvents: 'none'} : {}} onClick={() => run()}>

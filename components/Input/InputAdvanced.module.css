@@ -1,0 +1,98 @@
+.confg_advanced_box{
+    width: 100%;
+    padding: 12px 12px 22px;
+    background-color: var(--background-color-5);
+    margin-top: 20px;
+    border-radius: 14px;
+    border: 2px solid #6ca6fe31;
+}
+
+.header_box{
+    text-align: center;
+    margin:  8px 0px 28px;
+}
+
+.header_box > span{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-blue-4);
+    position: relative;
+}
+
+.header_box > span::before{
+    position: absolute;
+    content: '';
+    bottom: -4px;
+    width: 90%;
+    transform: translateX(-50%);
+    left: 50%;
+    height: 2px;
+    background-color: var(--color-stroke-2);
+}
+
+.inputs_advanced_box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    align-items: center;
+}
+
+.title_crossover{
+    width: 100%;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.inputs_crossover_box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    justify-items: center;
+}
+
+.radio_crossover_box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.radio_crossover_box > label{
+    cursor: pointer;
+    padding-bottom: 8px;
+    font-size: 14px;
+    color: var(--color-text-3);
+    font-weight: 600;
+}
+
+.radio_crossover_box > input[type="radio"] {
+    cursor: pointer;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 0.15em solid var(--color-stroke);
+    border-radius: 50%;
+    display: grid;
+    place-content: center;
+}
+
+.radio_crossover_box > input[type="radio"]:checked{
+    border-color: var(--color-blue-2);
+}
+
+.radio_crossover_box > input[type="radio"]::before {
+    content: "";
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 8px 8px var(--color-blue-2);
+}
+  
+.radio_crossover_box > input[type="radio"]:checked::before {
+    transform: scale(1);
+}

@@ -1,24 +1,23 @@
-export function verifyValuesConfiguration(data, limits){
+export function verifyValuesConfiguration(data, limits, advanced){
     const returnVerification = {};
-    const defaultVerifications = ['dimension', 'generations', 'groups', 'points', 'stop', 'limits'];
+    const defaultVerifications = [{name: 'dimension'}, {name: 'generations'}, {name: 'groups'}, {name: 'points', min: 4}, {name: 'stop'}, {name: 'limits'}, {name: 'advanced', values: [{name: 'crossover_probability', min: 0, max: 1}, {name: 'disturbance_rate', min: 0, max: 2}]}];
 
     defaultVerifications.map(e => {
-        switch (e) {
+        switch (e.name) {
             case 'dimension':
-                console.log(data[e]?.value)
-                if (isNaN(data[e]?.value)) returnVerification.dimension = true;
+                if (defaultVerification(data[e.name].value)) returnVerification[e.name] = true;
                 break;
             case 'stop':
-                stopVerification(data[e], returnVerification);
+                stopVerification(data[e.name], returnVerification);
                 break;
             case 'limits':
                 limitsVerification(limits, data.dimension?.value, returnVerification);
                 break;
-            case 'points':
-                if (defaultVerification(data[e], 4)) returnVerification[e] = true;
+            case 'advanced':
+                advancedVerification(advanced, e.values, returnVerification);
                 break;
             default:
-                if (defaultVerification(data[e], 1)) returnVerification[e] = true;
+                if (defaultVerification(data[e.name], e.min ? e.min : 1, e.max ? e.max : undefined)) returnVerification[e.name] = true;
                 break;
         }
     })
@@ -26,11 +25,22 @@ export function verifyValuesConfiguration(data, limits){
     return returnVerification;
 }
 
-function defaultVerification(value, min, max){
+function defaultVerification(value, min = 1, max){
     if(isNaN(value)) return true;
     if(min !== undefined && value < min) return true;
     if(max !== undefined && value > max) return true;
     return false;
+}
+
+function advancedVerification(advancedValue, values, returnVerification){
+    if(!advancedValue.active) return;
+    returnVerification.advanced = {};
+    values.map((e) =>{
+        if(advancedValue?.[e.name] !== undefined && advancedValue?.[e.name] !== ""){
+            if(defaultVerification(advancedValue?.[e.name], e.min, e.max)) returnVerification.advanced[e.name]= true;
+        }
+    })
+    if(Object.keys(returnVerification.advanced).length === 0) delete returnVerification.advanced;
 }
 
 function limitsVerification(limitsValue, dimension, returnVerification){

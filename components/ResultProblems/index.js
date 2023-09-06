@@ -16,7 +16,7 @@ function ResultProblems({generations = [], data= {}}){
         labels: [...Array(generations.length).keys()].map(number => number + 1),
         datasets: [{
             borderColor: '#6CA6FE',
-            data: generations.length > 1 ?generations.map(e => e[0].result) : []
+            data: generations.length > 1 ?generations.map(e => e.result) : []
         }]
     };
 
@@ -53,7 +53,7 @@ function ResultProblems({generations = [], data= {}}){
     };
 
     function createBestPoint(){
-        let bestPoint = generations[(generations.length - 1)]?.[0];
+        let bestPoint = generations[(generations.length - 1)];
         return(
             <>
                 {bestPoint ?

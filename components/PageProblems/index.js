@@ -29,8 +29,8 @@ function PageProblems({confg = undefined}){
             let verification = verifyValuesConfiguration(data, limits, advanced);
             console.log('verification', verification);
             setVerifications(verification);
-            if(Object.keys(verification).length !== 0 ) return true;
-            const result = await runningAlghoritm(data, limits);
+            if(Object.keys(verification).length !== 0 ) return;
+            const result = await runningAlghoritm(data, limits, advanced.active ? advanced : {});
             setResults(result)
         } catch (error) {
             console.error("Erro durante a execução do algoritmo:", error);

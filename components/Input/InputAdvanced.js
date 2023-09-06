@@ -18,11 +18,11 @@ export default function InputLimits({onChangeAdvanced, advancedConfg={}, verific
                     <div className={styles.inputs_crossover_box}>
                         <div className={styles.radio_crossover_box}>
                             <label htmlFor='binomial'>Binomial</label>
-                            <input onChange={() => onChangeAdvanced('crossoverExp', false)} type="radio" name="crossing" id="binomial" />
+                            <input onChange={() => onChangeAdvanced('crossove_exp', false)} type="radio" name="crossing" id="binomial" />
                         </div>
                         <div className={styles.radio_crossover_box}>
                             <label htmlFor='exponencial'>Exponencial</label>
-                            <input defaultChecked={false} onChange={() => onChangeAdvanced('crossoverExp', true)} type="radio" name="crossing" id="exponencial" />
+                            <input defaultChecked={false} onChange={() => onChangeAdvanced('crossove_exp', true)} type="radio" name="crossing" id="exponencial" />
                         </div>
                     </div>
                 </div>

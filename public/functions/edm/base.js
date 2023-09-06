@@ -2,27 +2,31 @@ import {orderSliceArray, createPopulation} from './population';
 import { sampleSize, cloneDeep } from 'lodash';
 import { resultFunction } from './resultFunction';
 
-export async function runningAlghoritm(data, limits){
+export async function runningAlghoritm(data, limits, advanced = {}){
 
     let results = [];
 
-    let newPop =  createPopulation(data, limits);
-    console.log('population', newPop);
+    let newPop = createPopulation(data, limits);
     newPop = orderSliceArray(false, newPop, data.points);
-    console.log('pop', newPop);
-    console.log('pop',betterPoint(newPop));
-    console.log('pop',data);
+
     for (let stopp = 0; stopp < data.stop.genValue; stopp++) {
-      newPop = await AlghoritmEDM(newPop, data, limits);
-      results.push(betterPoint(newPop));
-      console.log('pop',betterPoint(newPop));
+      newPop = await AlghoritmEDM(newPop, data, limits, advanced);
+      results.push(betterPoint(newPop)[0]);
     }
     return results;
 }
 
-async function AlghoritmEDM(pop, data, limits){
+async function AlghoritmEDM(pop, data, limits, advanced){
+
+    //Variaveis
+
+    let disturbanceRate = advanced?.disturbance_rate ? advanced?.disturbance_rate : 1.4;
+    let crossoverProbability = advanced?.crossover_probability ? advanced?.crossover_probability : 0.6;
+    let crossoverType = advanced?.crossove_exp ? 'exponencial' : 'binomial';
+
     let k = 0, g = 0, i = 1;
     let popChanges = cloneDeep(pop);
+
     for (k = 0; k < pop.length; k++) {
       for ( g = 0; g < data.generations; g++) {
         let subPop = cloneDeep(popChanges[k]);
@@ -30,23 +34,16 @@ async function AlghoritmEDM(pop, data, limits){
 
           //MUTAÇÃO
 
-          console.log(`teste / K = ${k} - G = ${g} - I = ${i}`);
           let setChosen = cloneDeep(subPop[i]);
           let arrayInicial = cloneDeep(subPop);
           arrayInicial.splice(i, 1);
-          console.log(arrayInicial);
-          console.log(setChosen);
 
           let teste = sampleSize(arrayInicial, 3);
-          console.log(teste); 
-          console.log(actionVector(teste[0], teste[1]));
-          let teste2 = actionVector(teste[0], actionVector(actionVector(teste[1], teste[2], 'subtracao'), [], 'multiplicacaoValor', 1.4));
-          console.log(teste2);
+          let teste2 = await actionVector(teste[0], await actionVector( await actionVector(teste[1], teste[2], 'subtracao'), [], 'multiplicacaoValor', disturbanceRate));
 
           //CRUZAMENTO
 
-          let cr = 0.6;
-          let teste3 = crossingVector(cr, teste2, setChosen);
+          let teste3 = await crossingVector(crossoverProbability, crossoverType, teste2, setChosen);
 
           //Verificando viabilidade do vetor U
 
@@ -76,29 +73,21 @@ async function AlghoritmEDM(pop, data, limits){
     return popChanges;
 }
 
-function actionVector(arry1, arry2, type, value = 1){
-    console.log(arry1);
-    console.log(arry2);
-    console.log(type);
-    console.log(value);
+async function actionVector(arry1, arry2, type, value = 1){
     let arryFinal = {};
     for(const property in arry1){
       if(property !== 'result'){
         switch (type) {
           case 'soma':
-            console.log('soma');
             arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(2));
           break;
           case 'subtracao':
-            console.log('subtracao');
             arryFinal[property] = parseFloat((arry1[property] - arry2[property]).toFixed(2));
           break;
           case 'multiplicacaoValor':
-            console.log('multiplicacaoValor');
             arryFinal[property] = parseFloat((arry1[property] * value).toFixed(2));
           break;
           default:
-            console.log('error');
             arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(2));
           break;
         }
@@ -112,18 +101,26 @@ export function betterPoint(pop){
     return arry;
 }
 
-function crossingVector(cr, arryV, arryX){
+async function crossingVector(cr, type, arryV, arryX){
+  let typeExponential = false;
   let arryFinal = {};
   for(const property in arryV){
     if(property === 'result'){
       return;
     }
-    if(Math.random() > cr){
-      console.log('Entrou no Cruzamento', property);
-      arryFinal[property] = arryX[property];
+    if(type === 'binomial'){
+      if(Math.random() > cr){
+        arryFinal[property] = arryX[property];
+      }else{
+        arryFinal[property] = arryV[property];
+      }
     }else{
-      console.log('Não Entrou no Cruzamento', property);
-      arryFinal[property] = arryV[property];
+      if(Math.random() > cr) typeExponential = true;
+      if(typeExponential){
+        arryFinal[property] = arryX[property];
+      }else{
+        arryFinal[property] = arryV[property];
+      }
     }
   }
   return arryFinal;

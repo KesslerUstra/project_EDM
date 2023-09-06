@@ -35,8 +35,7 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
     }
 
     function changeDataAdvanced(type, value){
-        console.log(`teste`, value)
-        if(type.includes('crossoverExp')){
+        if(type.includes('crossove_exp')){
             setAdvanced(prev => ({...prev, [type]: value}));
             return;
         }

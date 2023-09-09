@@ -80,10 +80,26 @@ function ResultProblems({generations = [], data= {}}){
     return(
         <div className={styles.result_problem_box}>
             <div className={styles.result_one}>
-                <div className={styles.best_point_box}>
-                    <h5>Melhor Ponto</h5>
-                    <div className={styles.best_point_values_box}>
-                        {createBestPoint()}
+                <div className={styles.values_default_box}>
+                    <div className={styles.best_point_box}>
+                        <h5>Melhor Ponto</h5>
+                        <div className={styles.best_point_values_box}>
+                            {createBestPoint()}
+                        </div>
+                    </div>
+                    <div className={styles.values_box}>
+                        <h5>Tabela de Dados</h5>
+                        <div className={styles.values_inside_box}>
+                            <div className={styles.children_box_best_point} style={{marginBottom: '12px'}}>
+                                <span className={styles.variable_best_point}>Média</span>
+                                <span className={styles.result_best_point}>3</span>
+                            </div>
+                            <div className={styles.children_box_best_point}>
+                                <span className={styles.variable_best_point}>Desvio Padrão</span>
+                                <span className={styles.result_best_point}>3</span>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
                 <div className={styles.graph_gen_box}>

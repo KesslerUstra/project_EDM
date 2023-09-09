@@ -10,19 +10,25 @@
     gap: 60px;
 }
 
-.best_point_box, .graph_gen_box{
+.values_default_box{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.best_point_box, .graph_gen_box, .values_box{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
 
-.best_point_box > h5, .graph_gen_box > h5{
-    font-size: 16px;
+.best_point_box > h5, .graph_gen_box > h5, .values_box > h5{
+    font-size: 15px;
     color: var(--color-text-3);
 }
 
-.best_point_values_box{
+.best_point_values_box, .values_inside_box{
     background-color: var(--background-color-4);
     border-radius: 14px;
     min-width: 220px;
@@ -72,6 +78,7 @@
 
 .graph_gen_box{
     flex: 1;
+    max-width: 800px;
 }
 
 .graph_gen_values_box{
@@ -79,9 +86,8 @@
     border-radius: 14px;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    max-width: 800px;
     display: flex;
-    min-height: 250px;
+    min-height: 300px;
     max-height: 500px;
     padding: 26px 26px 40px;
 }

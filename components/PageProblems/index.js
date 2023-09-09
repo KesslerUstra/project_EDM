@@ -21,7 +21,7 @@ function PageProblems({confg = undefined}){
     const [advanced, setAdvanced] = useState({});
     const [loading, setLoading] = useState(false);
     const [verifications, setVerifications] = useState({});
-    const [results, setResults] = useState({});
+    const [results, setResults] = useState([]);
 
     async function run(){
         try {

@@ -1,6 +1,8 @@
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip } from "chart.js";
 import styles from './ResultProblems.module.css';
+import { useMemo } from "react";
+import { calcularDesvioPadrao } from "@/public/functions/resultValues";
 
 ChartJS.register(
     LineElement,
@@ -19,6 +21,15 @@ function ResultProblems({generations = [], data= {}}){
             data: generations.length > 1 ?generations.map(e => e.result) : []
         }]
     };
+
+
+
+    const valuesResult = useMemo(() => {
+        console.log(`calculando dp e media`, generations);
+        return calcularDesvioPadrao(generations);
+    }, [generations])
+
+    console.log(`media`, valuesResult);
 
     const options = {
         scales: {
@@ -80,10 +91,31 @@ function ResultProblems({generations = [], data= {}}){
     return(
         <div className={styles.result_problem_box}>
             <div className={styles.result_one}>
-                <div className={styles.best_point_box}>
-                    <h5>Melhor Ponto</h5>
-                    <div className={styles.best_point_values_box}>
-                        {createBestPoint()}
+                <div className={styles.values_default_box}>
+                    <div className={styles.best_point_box}>
+                        <h5>Melhor Ponto</h5>
+                        <div className={styles.best_point_values_box}>
+                            {createBestPoint()}
+                        </div>
+                    </div>
+                    <div className={styles.values_box}>
+                        <h5>Tabela de Dados</h5>
+                        <div className={styles.values_inside_box}>
+                            {Object.keys(valuesResult).length !== 0 ?
+                            <>
+                                <div className={styles.children_box_value} style={{marginBottom: '12px'}}>
+                                    <span className={styles.variable_value}>Média</span>
+                                    <span className={styles.result_value}>{valuesResult.m}</span>
+                                </div>
+                                <div className={styles.children_box_value}>
+                                    <span style={{fontSize: '14px'}} className={styles.variable_value}>Desvio Padrão</span>
+                                    <span style={{fontSize: '17px'}} className={styles.result_value}>{valuesResult.dp}</span>
+                                </div>
+                            </>
+                            :
+                                ''
+                            }
+                        </div>
                     </div>
                 </div>
                 <div className={styles.graph_gen_box}>

@@ -10,47 +10,65 @@
     gap: 60px;
 }
 
-.best_point_box, .graph_gen_box{
+.values_default_box{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.best_point_box, .graph_gen_box, .values_box{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
 }
 
-.best_point_box > h5, .graph_gen_box > h5{
-    font-size: 16px;
+.best_point_box > h5, .graph_gen_box > h5, .values_box > h5{
+    font-size: 15px;
     color: var(--color-text-3);
 }
 
-.best_point_values_box{
+.best_point_values_box, .values_inside_box{
     background-color: var(--background-color-4);
     border-radius: 14px;
     min-width: 220px;
     min-height: 180px;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    padding: 26px 26px 60px;
+    padding: 26px 26px 45px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.children_box_best_point{
+.values_inside_box{
+    min-height: 160px;
+}
+
+.children_box_best_point, .children_box_value{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     gap: 40px;
 }
 
-.variable_best_point{
+.children_box_value{
+    gap: 22px;
+}
+
+.variable_best_point, .variable_value{
     color: var(--color-blue-4);
     font-size: 16px;
     font-weight: 700;
 }
 
-.result_best_point{
+.result_best_point, .result_value{
     font-size: 26px;
     position: relative;
     font-weight: 700;
+}
+
+.result_value{
+    font-size: 22px;
 }
 
 .x_best_point{
@@ -60,7 +78,7 @@
     font-weight: 700;
 }
 
-.result_best_point::before, .x_best_point::before{
+.result_best_point::before, .x_best_point::before, .result_value::before{
     content: '';
     position: absolute;
     bottom: -5px;
@@ -72,6 +90,7 @@
 
 .graph_gen_box{
     flex: 1;
+    max-width: 800px;
 }
 
 .graph_gen_values_box{
@@ -79,9 +98,8 @@
     border-radius: 14px;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-    max-width: 800px;
     display: flex;
-    min-height: 250px;
+    min-height: 300px;
     max-height: 500px;
     padding: 26px 26px 40px;
 }

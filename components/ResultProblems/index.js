@@ -108,7 +108,7 @@ function ResultProblems({generations = [], data= {}}){
                                     <span className={styles.result_value}>{valuesResult.m}</span>
                                 </div>
                                 <div className={styles.children_box_value}>
-                                    <span style={{fontSize: '14px'}} className={styles.variable_value}>Desvio Padrão</span>
+                                    <span style={{fontSize: '14px', whiteSpace: 'nowrap'}} className={styles.variable_value}>Desvio Padrão</span>
                                     <span style={{fontSize: '17px'}} className={styles.result_value}>{valuesResult.dp}</span>
                                 </div>
                             </>

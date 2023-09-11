@@ -10,7 +10,7 @@ function BackButton(){
     const router = useRouter();
 
     return (
-        <button className={styles.back_button} onClick={() => router.back()} type='button'><TiArrowBackOutline /> <TiArrowBack className={styles.icon_back_button} /></button>
+        <button className={styles.back_button} onClick={() => router.back()}><TiArrowBackOutline /> <TiArrowBack className={styles.icon_back_button} /></button>
     )
 }
 

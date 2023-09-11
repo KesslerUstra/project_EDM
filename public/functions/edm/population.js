@@ -1,6 +1,6 @@
-import { resultFunction } from './resultFunction';
+import { executeFunctionAlgorithm } from './resultFunction';
 
-export function createPopulation(data, limits){
+export function createPopulation(nameProblem, data, limits){
     let population = [];
     for (let groupIdx = 0; groupIdx < data.groups; groupIdx++) {
       for (let pointsIdx = 0; pointsIdx < data.points; pointsIdx++) {
@@ -9,7 +9,7 @@ export function createPopulation(data, limits){
           let component = Math.floor(((Math.random() * (limits[componentIdx].upper_limit - limits[componentIdx].inferior_limit)) + limits[componentIdx].inferior_limit)*100)/100;
           points[componentIdx] = component;
         }
-        points.result = resultFunction(points);
+        points.result = executeFunctionAlgorithm(nameProblem, points);
         population.push(points);
       }
     }

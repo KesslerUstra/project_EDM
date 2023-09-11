@@ -3,20 +3,21 @@
 import { useState } from 'react';
 import ConfgProblems from '../ConfgProblems';
 import ResultProblems from '../ResultProblems';
-import BackButton from '../BackButton';
+import BackButton from '../Buttons/BackButton';
 import ReactLoading from 'react-loading';
+import SoonPage from '../SoonPage';
 
 import confgProblemsJson from '@/app/assets/json/confg_problems.json';
 import styles from './PageProblems.module.css';
 
-import { runningAlghoritm } from '@/public/functions/edm/base';
+import { runningAlgorithm } from '@/public/functions/edm/base';
 import { verifyValuesConfiguration } from '@/public/functions/verifyValues';
 
 function PageProblems({confg = undefined}){
 
     const problemSelect = confgProblemsJson[confg]
     
-    const [data, setData] = useState(problemSelect.data);
+    const [data, setData] = useState(problemSelect?.data);
     const [limits, setLimits] = useState({});
     const [advanced, setAdvanced] = useState({});
     const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ function PageProblems({confg = undefined}){
             console.log('verification', verification);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return;
-            const result = await runningAlghoritm(data, limits, advanced.active ? advanced : {});
+            const result = await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {});
             setResults(result)
         } catch (error) {
             console.error("Erro durante a execução do algoritmo:", error);
@@ -78,7 +79,11 @@ function PageProblems({confg = undefined}){
                 <ResultProblems generations={results} data={data} />
             </>
             :
-            <></>
+            <>
+                <div className={styles.not_found_box}>
+                    <span>Problema Não Listado</span>
+                </div>
+            </>
             }
         </div>
     )

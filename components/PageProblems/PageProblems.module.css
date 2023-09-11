@@ -1,6 +1,7 @@
 .page_problem_box{
     max-width: var(--max-width);
     margin: 0 auto;
+    height: 100%;
     padding: 50px 0px 80px;
 }
 
@@ -78,4 +79,18 @@
 
 .loading_button_run{
     position: absolute;
+}
+
+.not_found_box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+    height: 100%;
+}
+
+.not_found_box > span{
+    font-size: 20px;
+    font-weight: 600;
 }

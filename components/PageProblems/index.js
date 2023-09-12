@@ -5,9 +5,8 @@ import ConfgProblems from '../ConfgProblems';
 import ResultProblems from '../ResultProblems';
 import BackButton from '../Buttons/BackButton';
 import ReactLoading from 'react-loading';
-import SoonPage from '../SoonPage';
 
-import confgProblemsJson from '@/app/assets/json/confg_problems.json';
+import {problems as confgProblemsJson} from '@/app/assets/confg_problems';
 import styles from './PageProblems.module.css';
 
 import { runningAlgorithm } from '@/public/functions/edm/base';

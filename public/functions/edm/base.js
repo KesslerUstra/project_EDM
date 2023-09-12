@@ -10,6 +10,7 @@ export async function runningAlgorithm(nameProblem, data, limits, advanced = {})
 
     for (let stopp = 0; stopp < data.stop.genValue; stopp++) {
       newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced);
+      console.log('pop', newPop)
       results.push(betterPoint(newPop)[0]);
     }
     return results;
@@ -78,16 +79,16 @@ async function actionVector(arry1, arry2, type, value = 1){
       if(property !== 'result'){
         switch (type) {
           case 'soma':
-            arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(2));
+            arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(4));
           break;
           case 'subtracao':
-            arryFinal[property] = parseFloat((arry1[property] - arry2[property]).toFixed(2));
+            arryFinal[property] = parseFloat((arry1[property] - arry2[property]).toFixed(4));
           break;
           case 'multiplicacaoValor':
-            arryFinal[property] = parseFloat((arry1[property] * value).toFixed(2));
+            arryFinal[property] = parseFloat((arry1[property] * value).toFixed(4));
           break;
           default:
-            arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(2));
+            arryFinal[property] = parseFloat((arry1[property] + arry2[property]).toFixed(4));
           break;
         }
       }

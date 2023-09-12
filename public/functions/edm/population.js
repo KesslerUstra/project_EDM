@@ -6,7 +6,7 @@ export function createPopulation(nameProblem, data, limits){
       for (let pointsIdx = 0; pointsIdx < data.points; pointsIdx++) {
         let points = {};
         for (let componentIdx = 0; componentIdx < data.dimension.value; componentIdx++) {
-          let component = Math.floor(((Math.random() * (limits[componentIdx].upper_limit - limits[componentIdx].inferior_limit)) + limits[componentIdx].inferior_limit)*100)/100;
+          let component = Math.floor(((Math.random() * (limits[componentIdx].upper_limit - limits[componentIdx].inferior_limit)) + limits[componentIdx].inferior_limit)*10000)/10000;
           points[componentIdx] = component;
         }
         points.result = executeFunctionAlgorithm(nameProblem, points);

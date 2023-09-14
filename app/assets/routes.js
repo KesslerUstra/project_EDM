@@ -1,15 +1,11 @@
 export const routes = [
     {
-        name: 'Problema das Molas',
+        name: 'Problema Estatico das Molas',
         href: '/problems/springs'
     },
     {
         name: 'Problema do Pêndulo',
         href: '/problems/pendulum'
-    },
-    {
-        name: 'Equilibrio Estatico das Molas',
-        href: '/problems/staticbalancesprings'
     },
     {
         name: 'Projeto de um Mastro de Bandeira',

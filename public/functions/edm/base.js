@@ -2,21 +2,21 @@ import {orderSliceArray, createPopulation} from './population';
 import { sampleSize, cloneDeep } from 'lodash';
 import { executeFunctionAlgorithm } from './resultFunction';
 
-export async function runningAlgorithm(nameProblem, data, limits, advanced = {}){
+export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}){
     let results = [];
 
-    let newPop = createPopulation(nameProblem, data, limits);
+    let newPop = createPopulation(nameProblem, data, limits, restrictions);
     newPop = orderSliceArray(false, newPop, data.points);
 
     for (let stopp = 0; stopp < data.stop.genValue; stopp++) {
-      newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced);
+      newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced, restrictions);
       console.log('pop', newPop)
       results.push(betterPoint(newPop)[0]);
     }
     return results;
 }
 
-async function AlgorithmEDM(nameProblem, pop, data, limits, advanced){
+async function AlgorithmEDM(nameProblem, pop, data, limits, advanced, restrictions){
 
     //Variaveis
 
@@ -57,9 +57,9 @@ async function AlgorithmEDM(nameProblem, pop, data, limits, advanced){
 
           //SELEÇÃO
 
-          teste3.result = executeFunctionAlgorithm(nameProblem, teste3);
+          teste3.result = executeFunctionAlgorithm(nameProblem, teste3, restrictions);
           if(setChosen.result === undefined){
-            setChosen.result = executeFunctionAlgorithm(nameProblem, setChosen);
+            setChosen.result = executeFunctionAlgorithm(nameProblem, setChosen, restrictions);
           }
 
           if(teste3.result < setChosen.result){

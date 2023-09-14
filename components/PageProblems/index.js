@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ConfgProblems from '../ConfgProblems';
 import ResultProblems from '../ResultProblems';
 import BackButton from '../Buttons/BackButton';
@@ -14,7 +14,9 @@ import { verifyValuesConfiguration } from '@/public/functions/verifyValues';
 
 function PageProblems({confg = undefined}){
 
-    const problemSelect = confgProblemsJson[confg]
+    const problemSelect = useMemo(() => {
+        return confgProblemsJson[confg]
+    }, [confg])
     
     const [data, setData] = useState(problemSelect?.data);
     const [limits, setLimits] = useState({});
@@ -30,7 +32,7 @@ function PageProblems({confg = undefined}){
             console.log('verification', verification);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return;
-            const result = await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {});
+            const result = await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {});
             setResults(result)
         } catch (error) {
             console.error("Erro durante a execução do algoritmo:", error);

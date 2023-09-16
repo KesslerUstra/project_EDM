@@ -61,7 +61,7 @@
     gap: 14px;
     padding: 20px;
     flex-direction: column;
-    border: 2px solid rgba(159, 159, 159, 0.30);
+    border: 2px solid rgba(159, 159, 159, 0.10);
 }
 
 .item_problem_box{
@@ -113,4 +113,28 @@
     color: var(--color-current);
     transition: color 150ms;
     font-size: 22px;
+}
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .problems_list_box{
+        padding: 70px 8px 0px;
+    }
+
+    .search_problems_box > svg{
+        font-size: 18px;
+    }
+
+    .search_problems_box > input{
+        font-size: 14px;
+    }
+
+    .list_box{
+        margin: 20px 0px 60px;
+    }
+
+    .item_problem_box > span{
+        font-size: 14px;
+    }
 }

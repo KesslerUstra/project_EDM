@@ -33,6 +33,14 @@
     height: 40px;
 }
 
+.bar_margin_1{
+    margin: 0px 36px 0px -10px;
+}
+
+.bar_margin_2{
+    margin: 0px 20px 0px 6px;
+}
+
 .title_list_box .bar::before{
     position: absolute;
     content: '';
@@ -60,4 +68,25 @@
     height: 2px;
     background-color: var(--color-stroke);
     border-radius: 2px;
+}
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+
+    .logo{
+        padding: 40px 0px 52px;
+    }
+
+    .title_list_box h2{
+        font-size: 19px;
+    }
+
+    .bar_margin_1{
+        margin: 0px 20px 0px -10px;
+    }
+    
+    .bar_margin_2{
+        margin: 0px 16px 0px -8px;
+    }
 }

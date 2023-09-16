@@ -94,3 +94,15 @@
     font-size: 20px;
     font-weight: 600;
 }
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .title_problem{
+        font-size: 22px;
+    }
+
+    .confg_title_box h4{
+        font-size: 15px;
+    }
+}

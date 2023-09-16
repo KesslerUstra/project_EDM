@@ -101,6 +101,10 @@
   margin: 0;
 }
 
+button, a, input{
+  -webkit-tap-highlight-color: transparent;
+}
+
 html{
   display: flex;
   min-height: 100%;

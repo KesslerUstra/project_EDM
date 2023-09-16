@@ -103,3 +103,28 @@
     max-height: 500px;
     padding: 26px 26px 40px;
 }
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .result_problem_box{
+        padding: 60px 10px 0px;
+    }
+
+    .result_one{
+        flex-direction: column;
+    }
+
+    .values_default_box{
+        gap: 30px;
+    }
+
+    .best_point_values_box, .values_inside_box{
+        min-width: 80%;
+    }
+
+    .graph_gen_values_box{
+        max-width: 95%;
+        min-height: 200px;
+    }
+}

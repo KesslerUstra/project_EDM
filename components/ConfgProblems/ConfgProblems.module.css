@@ -147,3 +147,32 @@
 .button .checkbox:checked ~ .layer {
     background-color: var(--color-blue-3);
 }
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .toggle_confg_box{
+        margin: 20px 10px 0px;
+    }
+
+    .toggle_box > span{
+        font-size: 12px;
+    }
+
+    .button_default_values > div{
+        font-size: 12px;
+    }
+
+    .button_default_values > span{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 450px) {
+    .toggle_confg_box{
+        flex-direction: column;
+        gap: 20px;
+        margin: 20px auto 0px;
+        max-width: 85%;
+    }
+}

@@ -18,5 +18,13 @@ export const routes = [
     {
         name: 'Problema do Fazendeiro',
         href: '/problems/farmer'
+    },
+    {
+        name: 'Problema Recipiente de Pressão',
+        href: '/problems/pressure'
+    },
+    {
+        name: 'Problema Viga Engastada',
+        href: '/problems/beam'
     }
 ]

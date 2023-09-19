@@ -110,3 +110,39 @@
     min-height: 300px;
     max-height: 500px;
 }
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .loading_result_box{
+        margin-top: 133px;
+    }
+
+    .loading_result_box{
+        flex-direction: column;
+    }
+
+    .loading_values_default_box{
+        gap: 30px;
+    }
+
+    .loading_result_subbox{
+        min-width: 80%;
+    }
+
+    .loading_graph{
+        max-width: 95%;
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 420px) {
+    .title_loading{
+        height: 26px;
+        width: 70%;
+    }
+
+    .options_loading{
+        height: 133px;
+    }
+}

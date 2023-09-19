@@ -21,6 +21,7 @@ export default function Home() {
             <div className={styles.stroke}></div>
           </div>
           <SearchProblems />
+          <div className={styles.footer}>Criado por <a target='_blank' href="https://www.linkedin.com/in/eduardo-kessler-ustra">Eduardo Kessler</a></div>
         </div>
       </Suspense>
     </>

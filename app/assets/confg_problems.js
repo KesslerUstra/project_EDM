@@ -7,12 +7,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 2, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -35,12 +35,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 1, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -59,12 +59,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 2, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -103,12 +103,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 6, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -169,12 +169,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 3, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -210,12 +210,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 4, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{
@@ -257,12 +257,12 @@ export const problems = {
         "default": {
             "data": {
                 "dimension": {"value": 4, "disabled": true},
-                "generations": 4,
-                "groups": 3,
-                "points": 5,
+                "generations": 10,
+                "groups": 10,
+                "points": 12,
                 "stop": {
                     "genActive": true,
-                    "genValue": 4
+                    "genValue": 10
                 }
             },
             "limits":{

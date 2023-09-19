@@ -1,0 +1,112 @@
+.loading_page_box{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 100%;
+    padding: 50px 0px 80px;
+}
+
+.title_loading{
+    height: 30px;
+    max-width: 250px;
+    width: 60%;
+    margin: 0 auto;
+    min-width: 200px;
+}
+
+.options_loading{
+    height: 83px;
+    max-width: 1100px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 92px;
+    min-width: 300px;
+}
+
+.confg_loading{
+    padding: 40px 0px 0px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+    max-width: 1100px;
+    justify-items: center;
+    gap: 40px;
+    margin: 0 auto;
+}
+
+.loading_input_box{
+    display: flex;
+    flex-direction: column;
+    max-width: 280px;
+    gap: 8px;
+    width: 100%;
+}
+
+.loading_limits_box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input_loading{
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.limits_loading{
+    height: 145px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.label_loading{
+    height: 17px;
+    width: 82px;
+}
+
+.button_loading{
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 113px;
+    height: 41px;
+    border-radius: 8px;
+}
+
+.loading_result_box{
+    margin-top: 153px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.loading_values_default_box{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.loading_result_subbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.loading_values_default_label{
+    height: 17px;
+    width: 90px;
+}
+
+.loading_values_default{
+    border-radius: 14px;
+    min-width: 220px;
+    min-height: 180px;
+}
+
+.loading_graph{
+    border-radius: 14px;
+    width: 100%;
+    min-height: 300px;
+    max-height: 500px;
+}

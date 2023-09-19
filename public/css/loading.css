@@ -1,0 +1,11 @@
+.skeleton{
+    background-color: var(--color-skeleton);
+    border-radius: 5px;
+    animation: skeleton 1s ease infinite alternate;
+}
+
+@keyframes skeleton {
+    to {
+        opacity: 0.3;
+    }
+}

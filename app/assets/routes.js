@@ -22,9 +22,5 @@ export const routes = [
     {
         name: 'Problema Recipiente de Pressão',
         href: '/problems/pressure'
-    },
-    {
-        name: 'Problema Viga Engastada',
-        href: '/problems/beam'
     }
 ]

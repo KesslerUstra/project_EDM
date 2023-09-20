@@ -28,7 +28,6 @@ export function orderSliceArray(order = false, population, subArray){
             }
             return 0;
         });
-        console.log('population', popNew);
     }
 
     const subArrays = [];
@@ -39,6 +38,5 @@ export function orderSliceArray(order = false, population, subArray){
         index += subArray;
     }
 
-    console.log('population', subArrays);
     return subArrays;
 }

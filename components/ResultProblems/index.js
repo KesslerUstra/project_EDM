@@ -25,11 +25,8 @@ function ResultProblems({generations = [], data= {}}){
 
 
     const valuesResult = useMemo(() => {
-        console.log(`calculando dp e media`, generations);
         return calcularDesvioPadrao(generations);
     }, [generations])
-
-    console.log(`media`, valuesResult);
 
     const options = {
         scales: {

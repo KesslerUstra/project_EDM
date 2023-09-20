@@ -4,16 +4,51 @@ import { executeFunctionAlgorithm } from './resultFunction';
 
 export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}){
     let results = [];
-
+    let variablesController = {gen: 1, repeat: 5, lastBest: null}
+    let best;
     let newPop = createPopulation(nameProblem, data, limits, restrictions);
     newPop = orderSliceArray(false, newPop, data.points);
 
-    for (let stopp = 0; stopp < data.stop.genValue; stopp++) {
+    do {
       newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced, restrictions);
-      console.log('pop', newPop)
-      results.push(betterPoint(newPop)[0]);
-    }
+      best = betterPoint(newPop)[0];
+      results.push(best);
+    } while (stopMethod(data.stop, variablesController, best));
+
     return results;
+}
+
+function stopMethod(stopVariable, variables, best){
+  let controller = 0;
+
+  if(stopVariable.genActive){
+    if(variables.gen >= stopVariable.genValue){
+      controller = 1;
+    }
+  }
+
+  if(stopVariable.diffActive){
+    if(variables.lastBest !== null){
+      if(best.result === variables.lastBest.result){
+        if(variables.repeat > 0){
+          variables.repeat --;
+        }else{
+          controller = 1;
+        }
+      }
+      else if(Math.abs(best.result - variables.lastBest.result) < stopVariable.diffValue){
+        controller = 1;
+      }
+    }
+  }
+
+  variables.gen ++;
+  variables.lastBest = best;
+  if(controller >= 1){
+    return false;
+  }else{
+    return true;
+  }
 }
 
 async function AlgorithmEDM(nameProblem, pop, data, limits, advanced, restrictions){

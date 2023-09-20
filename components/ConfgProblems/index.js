@@ -11,10 +11,6 @@ import AnimateHeight from 'react-animate-height';
 
 function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLimits, confgAdvanced, setAdvanced, verification}){
 
-    console.log(confgData);
-    console.log(confgLimits);
-    console.log(confgAdvanced);
-
     function changeData(type, value, flag){
         if(flag){
             setData(prev => ({...prev, [type]: {...prev[type], value: parseInt(value) ? parseInt(value) : 0}}));
@@ -23,7 +19,7 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
     }
 
     function changeDataLimits(type, idx, value){
-        setLimits(prev => ({...prev, [idx]: { ...prev[idx], [type]: parseInt(value) !== NaN ? (value === "" ? "" : parseInt(value)) : null}}));
+        setLimits(prev => ({...prev, [idx]: { ...prev[idx], [type]: parseFloat(value) !== NaN ? (value === "" ? "" : parseFloat(value)) : null}}));
     }
 
     function changeDataStop(type, value){
@@ -31,7 +27,7 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
             setData(prev => ({...prev, stop: {...prev?.stop, [type]: !prev?.stop?.[type]}}));
             return;
         }
-        setData(prev => ({...prev, stop: {...prev?.stop, [type]: parseInt(value) !== NaN ? (value === "" ? "" : parseInt(value)) : 0}}));
+        setData(prev => ({...prev, stop: {...prev?.stop, [type]: parseFloat(value) !== NaN ? (value === "" ? "" : parseFloat(value)) : 0}}));
     }
 
     function changeDataAdvanced(type, value){

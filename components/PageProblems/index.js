@@ -29,7 +29,6 @@ function PageProblems({confg = undefined}){
         try {
             setLoading(true);
             let verification = verifyValuesConfiguration(data, limits, advanced);
-            console.log('verification', verification);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return;
             const result = await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {});

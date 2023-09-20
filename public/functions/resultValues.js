@@ -7,8 +7,6 @@ export function calcularDesvioPadrao(arr = []) {
       return acc + diferenca * diferenca;
     }, 0);
 
-    console.log(somaDosQuadradosDasDiferencas);
-  
     const desvioPadrao = Math.sqrt(somaDosQuadradosDasDiferencas / arr.length);
   
     return {m:  media.toFixed(4), dp: desvioPadrao.toFixed(4)};

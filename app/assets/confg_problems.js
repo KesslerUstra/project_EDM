@@ -286,11 +286,12 @@ export const problems = {
         },
         "restrictions":{
             active: true,
+            rp: 100000,
             variables : {
                 P: 6000,
                 L: 14,
-                E: Math.pow(300,6),
-                G: Math.pow(120,6),
+                E: 30*Math.pow(10,6),
+                G: 12*Math.pow(120,6),
                 tm: 13600,
                 sm: 30000,
                 gm: 0.25,

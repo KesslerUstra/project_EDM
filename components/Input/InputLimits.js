@@ -5,7 +5,6 @@ import styles from './InputLimits.module.css';
 import InputSimple from './InputSimple';
 
 export default function InputLimits({dimesion = 0, onChangeLimits, values={}, verification = {}}){
-    console.log(`teste`, values?.[0])
     return(
         <div className={styles.input_limits_box}>
             <div className={styles.header_box}>

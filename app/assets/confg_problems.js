@@ -272,7 +272,7 @@ export const problems = {
                 },
                 "1": {
                     "inferior_limit": 0.1,
-                    "upper_limit": 4
+                    "upper_limit": 10
                 },
                 "2": {
                     "inferior_limit": 0.1,
@@ -280,7 +280,7 @@ export const problems = {
                 },
                 "3": {
                     "inferior_limit": 0.1,
-                    "upper_limit": 10
+                    "upper_limit": 2
                 }
             }
         },
@@ -291,18 +291,18 @@ export const problems = {
                 P: 6000,
                 L: 14,
                 E: 30*Math.pow(10,6),
-                G: 12*Math.pow(120,6),
+                G: 12*Math.pow(10,6),
                 tm: 13600,
                 sm: 30000,
                 gm: 0.25,
                 t1: function(data){return(this.P/(Math.sqrt(2)*data[0]*data[1]))},
                 M: function(data){return(this.P*(this.L+(data[1]/2)))},
                 R: function(data){return(Math.sqrt(Math.pow(data[1],2)/4 + Math.pow(((data[0] + data[2])/2),2)))},
-                J: function(data){return(2*Math.sqrt(2)*data[0]*data[1]*(Math.pow(data[1],2)/12 + Math.pow((data[0] + data[2])/2, 2)))},
+                J: function(data){return(2*(Math.sqrt(2)*data[0]*data[1]*(Math.pow(data[1],2)/12 + Math.pow((data[0] + data[2])/2, 2))))},
                 t2: function(data){return(this.M(data)*this.R(data)/this.J(data))},
                 si: function(data){return(6*this.P*this.L/(data[3]*Math.pow(data[2],2)))},
                 ga: function(data){return((4*this.P*Math.pow(this.L,3))/(this.E*Math.pow(data[2], 3)*data[3]))},
-                Pc: function(data){return(((4.013*this.E*Math.sqrt(Math.pow(data[2],2)*Math.pow(data[3],6)/36))/Math.pow(this.L,2))*(1-(data[2]/(2*this.L))*Math.sqrt(this.E/(4*this.G))))},
+                Pc: function(data){return(((4.013*this.E*Math.sqrt(Math.pow(data[2],2)*Math.pow(data[3],6)/36))/Math.pow(this.L,2))*(1-(data[2]/(2*this.L))* Math.sqrt(this.E/(4*this.G))))},
                 t: function(data){return(Math.sqrt(Math.pow(this.t1(data),2) + 2*this.t1(data)*this.t2(data)*(data[1]/(2*this.R(data))) + Math.pow(this.t2(data),2)))}
             },
             functions:[

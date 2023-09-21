@@ -2,20 +2,34 @@ import {orderSliceArray, createPopulation} from './population';
 import { sampleSize, cloneDeep } from 'lodash';
 import { executeFunctionAlgorithm } from './resultFunction';
 
-export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}){
-    let results = [];
-    let variablesController = {gen: 1, repeat: 5, lastBest: null}
-    let best;
-    let newPop = createPopulation(nameProblem, data, limits, restrictions);
-    newPop = orderSliceArray(false, newPop, data.points);
+export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}, endFn, maxTimePerChunk) {
+  maxTimePerChunk = maxTimePerChunk || 200;
+  let results = [];
+  let variablesController = {gen: 1, repeat: 5, lastBest: null}
+  let best;
+  let newPop = createPopulation(nameProblem, data, limits, restrictions);
+  newPop = orderSliceArray(false, newPop, data.points);
 
+  function now() {
+      return new Date().getTime();
+  }
+
+  async function doChunk() {
+    let startTime = now();
+    let bolStop = true;
     do {
       newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced, restrictions);
       best = betterPoint(newPop)[0];
       results.push(best);
-    } while (stopMethod(data.stop, variablesController, best));
-
-    return results;
+      bolStop = stopMethod(data.stop, variablesController, best)
+    } while ( bolStop && (now() - startTime) <= maxTimePerChunk);
+    if (bolStop) {
+        setTimeout(doChunk, 10);
+    }else{
+      endFn(results);
+    }
+  }    
+  doChunk();
 }
 
 function stopMethod(stopVariable, variables, best){

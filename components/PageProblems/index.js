@@ -25,18 +25,21 @@ function PageProblems({confg = undefined}){
     const [verifications, setVerifications] = useState({});
     const [results, setResults] = useState([]);
 
+    function setResultFunction(result){
+        setLoading(false);
+        setResults(result);
+    }
+
     async function run(){
         try {
             setLoading(true);
             let verification = verifyValuesConfiguration(data, limits, advanced);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return;
-            const result = await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {});
-            setResults(result)
+            await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {}, setResultFunction);
         } catch (error) {
-            console.error("Erro durante a execução do algoritmo:", error);
-        }finally{
             setLoading(false);
+            console.error("Erro durante a execução do algoritmo:", error);
         }
     }
 

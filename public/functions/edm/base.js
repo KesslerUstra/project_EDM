@@ -2,7 +2,7 @@ import {orderSliceArray, createPopulation} from './population';
 import { sampleSize, cloneDeep } from 'lodash';
 import { executeFunctionAlgorithm } from './resultFunction';
 
-export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}, endFn, maxTimePerChunk) {
+export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}, endFn, loadingFn, maxTimePerChunk) {
   maxTimePerChunk = maxTimePerChunk || 200;
   let results = [];
   let variablesController = {gen: 1, repeat: 5, lastBest: null}
@@ -21,15 +21,31 @@ export async function runningAlgorithm(nameProblem, data, limits, advanced = {},
       newPop = await AlgorithmEDM(nameProblem, newPop, data, limits, advanced, restrictions);
       best = betterPoint(newPop)[0];
       results.push(best);
-      bolStop = stopMethod(data.stop, variablesController, best)
+      bolStop = stopMethod(data.stop, variablesController, best);
     } while ( bolStop && (now() - startTime) <= maxTimePerChunk);
     if (bolStop) {
-        setTimeout(doChunk, 10);
+      loadingFn(calculateLoading(data.stop, variablesController, best));
+      setTimeout(doChunk, 10);
     }else{
       endFn(results);
     }
   }    
   doChunk();
+}
+
+function calculateLoading(stopVariable, variables, best){
+
+  if(stopVariable.genActive && stopVariable.diffActive){
+    return Math.max((5 - variables.repeat)*20, parseInt((variables.gen / stopVariable.genValue) * 100));
+  }
+
+  if(stopVariable.genActive){
+    return parseInt((variables.gen / stopVariable.genValue) * 100);
+  }
+
+  if(stopVariable.diffActive){
+    return(5 - variables.repeat)*20;
+  }
 }
 
 function stopMethod(stopVariable, variables, best){

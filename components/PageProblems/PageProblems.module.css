@@ -46,6 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .button_run_box > button{
@@ -65,7 +66,9 @@
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
-    padding: 12px 30px;
+    width: 120px;
+    overflow: hidden;
+    height: 42px;
 }
 
 .button_run_box > button span {
@@ -77,8 +80,25 @@
     opacity: .85;
 }
 
-.loading_button_run{
+.running_button{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.running_button > span{
+    position: relative;
+    z-index: 4;
+}
+
+.running_button > div{
     position: absolute;
+    background-color: var(--color-green-1);
+    height: 100%;
+    left: 0;
 }
 
 .not_found_box{

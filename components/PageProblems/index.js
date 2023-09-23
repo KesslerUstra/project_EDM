@@ -4,13 +4,13 @@ import { useState, useMemo } from 'react';
 import ConfgProblems from '../ConfgProblems';
 import ResultProblems from '../ResultProblems';
 import BackButton from '../Buttons/BackButton';
-import ReactLoading from 'react-loading';
 
 import {problems as confgProblemsJson} from '@/app/assets/confg_problems';
 import styles from './PageProblems.module.css';
 
 import { runningAlgorithm } from '@/public/functions/edm/base';
 import { verifyValuesConfiguration } from '@/public/functions/verifyValues';
+import Loading from '@/app/problems/[problemHeader]/loading';
 
 function PageProblems({confg = undefined}){
 
@@ -30,13 +30,21 @@ function PageProblems({confg = undefined}){
         setResults(result);
     }
 
+    function loadingRunning(value){
+        console.log(value);
+        if (value > 100){
+            setLoading(100)
+            return;
+        }
+        setLoading(value)
+    }
+
     async function run(){
         try {
-            setLoading(true);
             let verification = verifyValuesConfiguration(data, limits, advanced);
             setVerifications(verification);
             if(Object.keys(verification).length !== 0 ) return;
-            await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {}, setResultFunction);
+            await runningAlgorithm(confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {}, setResultFunction, loadingRunning);
         } catch (error) {
             setLoading(false);
             console.error("Erro durante a execução do algoritmo:", error);
@@ -65,13 +73,14 @@ function PageProblems({confg = undefined}){
                     <button style={loading ? {pointerEvents: 'none'} : {}} onClick={() => run()}>
                         {loading ?
                             <>
-                                <ReactLoading className={styles.loading_button_run} type={'bubbles'} color="#fff" height={38} width={38} />
-                                <span style={{opacity: 0}}>Calcular</span>
+                                <div className={styles.running_button}>
+                                    <span>{`${loading}%`}</span>
+                                    <div style={{width: `${loading}%`}}></div>
+                                </div>
                             </>
                         :
                             <span>Calcular</span>
                         }
-                        
                     </button>
                 </div>
                 <div className={styles.confg_title_box}>

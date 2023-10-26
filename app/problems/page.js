@@ -1,7 +1,12 @@
-import SoonPage from "@/components/SoonPage"
+import styles from './page.module.css';
+import SearchProblems from '@/components/SearchProblems';
 
 export default function ProblemsLobby(){
+    
     return(
-        <SoonPage title={'Página Inicial de Problemas'} />
+        <div className={styles.main}>
+            <h2 className={styles.title_problem}>Página de Problemas</h2>
+            <SearchProblems />
+        </div>
     )
 }

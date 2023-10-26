@@ -1,0 +1,52 @@
+.stepper_count_box{
+    padding: 50px 10px 0px;
+    gap: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stepper_count_box > span{
+    transition: 250ms 300ms ease-out;
+    display: block;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color-6);
+    color: var(--color-text-3);
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stepper_count_box > span.active{
+    transition: 500ms 300ms ease-out;
+    color: #fff;
+    background-color: var(--color-blue-2);
+
+}
+
+.stepper_count_box > div{
+    position: relative;
+    width: 72px;
+    height: 1px;
+    background-color: var(--color-stroke-3);
+}
+
+.stepper_count_box > div::before{
+    transition: 500ms 250ms transform ease-out;
+    position: absolute;
+    content: '';
+    transform: scaleX(0);
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-blue-4);
+    transform-origin: left;
+}
+
+.stepper_count_box > div.active::before{
+    transition: 250ms 250ms transform ease-out;
+    transform: scaleX(1);
+}

@@ -7,23 +7,30 @@
   --background-color-3: #e2e2e683;
   --background-color-4: #8b9fbc21;
   --background-color-5: #6182b411;
-  --color-text-1: #232323;
-  --color-text-2: #232323bf;
-  --color-text-3: #232323a6;
-  --color-text-4: #2323236b;
-  --color-stroke: #23232366;
+  --background-color-6: #e2e2e2;
+  --background-color-7: #dfe1ee99;
+  --color-text-1: rgb(35, 35, 35);
+  --color-text-2: rgba(35, 35, 35, 0.75);
+  --color-text-3: rgba(35, 35, 35, 0.65);
+  --color-text-4: rgba(35, 35, 35, 0.45);
+  --color-stroke: rgba(35, 35, 35, 0.4);
   --color-stroke-2: #548DE34A;
+  --color-stroke-3: rgba(0, 0, 0, 0.1);
   --color-blue-1: #6CA6FE;
   --color-blue-2: #3277E0;
   --color-blue-3: #7299d42c;
   --color-blue-4: #3277E0CC;
   --color-green-1: #5ABF7D;
+  --color-green-2: #5ABF7D;
   --color-error-1: #fa324377;
+  --color-error-2: #fa3243b9;
   --color-skeleton: #d1d1d1;
   
+  --max-width: 1400px;
+  --max-width-section-1: 1100px;
+  --max-width-section-2: 900px;
   
 
-  --max-width: 1400px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
     'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',

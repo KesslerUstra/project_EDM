@@ -1,0 +1,31 @@
+.confg_title_section_box{
+    display: flex;
+    max-width: 700px;
+    padding: 55px 40px 0px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.confg_title_section_box h4{
+    color: var(--color-text-3);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.confg_title_section_box .stroke{
+    display: flex;
+    position: relative;
+    flex: 1;
+}
+
+.confg_title_section_box .stroke::before{
+    position: absolute;
+    content: '';
+    width: 100%;
+    max-width: 52px;
+    height: 1px;
+    background-color: var(--color-stroke);
+    border-radius: 2px;
+}

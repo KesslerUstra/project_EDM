@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { AiOutlineHome } from "react-icons/ai";
 import styles from './HomeButton.module.css'
 
-function BackButton(){
+function HomeButton(){
 
     const router = useRouter();
 
@@ -14,4 +14,4 @@ function BackButton(){
     )
 }
 
-export default BackButton;
+export default HomeButton;

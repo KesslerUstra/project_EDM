@@ -8,17 +8,23 @@ export const functions = {
     beam: (data) => (1.10471*Math.pow(data[0],2)*data[1] + 0.04811*data[2]*data[3]*(14 + data[1]))
 };
 
-export function executeFunctionAlgorithm(functionName, data, restrictions = {}) {
-    const func = functions[functionName];
-    const rp = restrictions.rp ? restrictions.rp : 1000
-    if (typeof func === 'function') {
-      if(restrictions?.active){
-        let p = 0;
-        restrictions.functions.map((e) => {
-          p += Math.pow(Math.max(0, e.function({data: data, variables: restrictions.variables})),2);
-        });
-        return (func(data) + rp*p);
-      }
-      return func(data);
+export function executeFunctionAlgorithm(confgFunction, data, restrictions = {}) {
+  let func;
+  if(typeof confgFunction === 'string'){
+    func = functions[confgFunction];
+  }else{
+    func = new Function(`data`, `return(${confgFunction.function})`);
+  }
+
+  const rp = restrictions.rp ? restrictions.rp : 1000
+  if (typeof func === 'function') {
+    if(restrictions?.active){
+      let p = 0;
+      restrictions.functions.map((e) => {
+        p += Math.pow(Math.max(0, e.function({data: data, variables: restrictions.variables})),2);
+      });
+      return (func(data) + rp*p);
     }
+    return func(data);
+  }
 }

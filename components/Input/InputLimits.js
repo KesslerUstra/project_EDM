@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './InputLimits.module.css';
 import InputSimple from './InputSimple';
 
-export default function InputLimits({dimesion = 0, onChangeLimits, values={}, verification = {}}){
+export default function InputLimits({dimesion = 0, onChangeLimits, values={}, verification = {}, disabled = false}){
     return(
         <div className={styles.input_limits_box}>
             <div className={styles.header_box}>
@@ -19,8 +19,8 @@ export default function InputLimits({dimesion = 0, onChangeLimits, values={}, ve
                         <div style={{gridArea: 'stroke1'}} className={styles.stroke_limit_inferior}></div>
                         <div className={styles.label_variable} style={{gridArea: 'variable'}}>{`x${i+1}`}</div>
                         <div style={{gridArea: 'stroke2'}} className={styles.stroke_limit_upper}></div>
-                        <InputSimple value={values[i]?.inferior_limit} style={{gridArea: 'input1'}} label={`Inferior`} onChange={(e) => onChangeLimits('inferior_limit', i, e.target.value)} type={'number'} limit={true} verification={verification?.[i]}/>
-                        <InputSimple value={values[i]?.upper_limit} style={{gridArea: 'input2'}} label={`Superior`} onChange={(e) => onChangeLimits('upper_limit', i, e.target.value)} type={'number'} limit={true} verification={verification?.[i]}/>
+                        <InputSimple disabled={disabled} value={values[i]?.inferior_limit} style={{gridArea: 'input1'}} label={`Inferior`} onChange={(e) => onChangeLimits('inferior_limit', i, e.target.value)} type={'number'} limit={true} verification={verification?.[i]}/>
+                        <InputSimple disabled={disabled} value={values[i]?.upper_limit} style={{gridArea: 'input2'}} label={`Superior`} onChange={(e) => onChangeLimits('upper_limit', i, e.target.value)} type={'number'} limit={true} verification={verification?.[i]}/>
                     </div>
                 )}
             </div>

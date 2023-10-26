@@ -1,3 +1,21 @@
+export async function getConfgProblems(nameProblem){
+    if (typeof window !== 'undefined') {
+        const existingProblems = await JSON.parse(localStorage.getItem('problems')) || {};
+        console.log(existingProblems)
+        console.log(nameProblem)
+        return existingProblems[nameProblem];
+    }
+    return undefined;
+}
+
+export async function addConfgProblems(data, name){
+    console.log(data, name)
+    const existingProblems = await JSON.parse(localStorage.getItem('problems')) || {};
+    const updatedProblems = {...existingProblems, [name]: data};
+    localStorage.setItem('problems', JSON.stringify(updatedProblems));
+    return;
+}
+
 export const problems = {
     "springs":{
         "title": "Problema das Molas",

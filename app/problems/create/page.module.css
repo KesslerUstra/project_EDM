@@ -1,0 +1,11 @@
+.page_create_box{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 100%;
+    padding: 50px 0px 80px;
+}
+
+.title_page{
+    font-size: 26px;
+    text-align: center;
+}

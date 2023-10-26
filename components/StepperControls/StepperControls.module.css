@@ -1,0 +1,28 @@
+.stepper_controls_box{
+    display: flex;
+    flex: 1;
+}
+
+.button{
+    font-family: 'Maven Pro', sans-serif;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+    font-size: 12px;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    outline: none;
+    border: none;
+    gap: 2px;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.button:hover{
+    opacity: 1;
+}
+
+.button > svg{
+    font-size: 16px;
+}

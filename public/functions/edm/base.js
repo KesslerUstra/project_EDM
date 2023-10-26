@@ -29,7 +29,7 @@ export async function runningAlgorithm(nameProblem, data, limits, advanced = {},
     }else{
       endFn(results);
     }
-  }    
+  }
   doChunk();
 }
 

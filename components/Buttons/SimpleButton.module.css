@@ -1,0 +1,27 @@
+.simpleButton{
+    padding: 9px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    font-family: 'Maven Pro', sans-serif;
+    transition: 200ms ease-in-out;
+    opacity: 0.8;
+}
+
+.simpleButton > svg{
+    font-size: 16px;
+}
+
+.simpleButton:hover{
+    opacity: 1;
+}
+
+.green{
+    background-color: var(--color-green-2);
+}

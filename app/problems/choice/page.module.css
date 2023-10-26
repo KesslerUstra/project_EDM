@@ -1,0 +1,101 @@
+.choice_box{
+    max-width: var(--max-width);
+    margin: 0 auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+}
+
+.choice_box > h2{
+    font-size: 26px;
+    text-align: center;
+}
+
+.cards_box{
+    display: flex;
+    gap: 20px;
+}
+
+.card_box{
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    width: 400px;
+    height: 180px;
+    background-color: var(--background-color-7);
+    transition: background-color 200ms;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.card_box:hover, .card_box:focus{
+    background-color: #e0e1e7;
+}
+
+.card_box > div:first-of-type{
+    padding: 20px 18px;
+}
+
+.title_card{
+    display: flex;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.title_card > span{
+    margin-right: 6px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.title_card > span::before{
+    content: '';
+    display: block;
+    height: 80%;
+    background-color: var(--color-card-stroke);
+    width: 3px;
+}
+
+.title_card > span:last-of-type{
+    margin-right: 15px;
+}
+
+.background_box{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+
+.background_box > img{
+    width: 105% !important;
+    height: 105% !important;
+    opacity: 0.5;
+    object-position: left center;
+    object-fit: cover !important;
+    transition: 250ms ease-out;
+}
+
+.card_box:hover .background_box > img{
+    width: 115% !important;
+    height: 115% !important;
+    opacity: 1;
+}
+
+/* MOBILE MODE */
+
+@media (max-width: 550px) {
+    .choice_box > h2{
+        font-size: 22px;
+        padding: 50px 0px 70px;
+    }
+}

@@ -6,6 +6,7 @@
 }
 
 .title_problem{
+    user-select: none;
     font-size: 26px;
     text-align: center;
 }

@@ -13,6 +13,7 @@ import { IoIosAdd, IoIosArrowDown, IoIosArrowUp, IoMdDownload, IoMdTrash } from 
 import SimpleButton from "../Buttons/SimpleButton";
 import BackButton from "../Buttons/BackButton";
 import ProblemsLoading from "../Loading/ProblemsLoading";
+import AnimateHeight from "react-animate-height";
 
 const mavemPro = Maven_Pro({ subsets: ['latin'] })
 
@@ -21,9 +22,7 @@ function SearchProblems(){
   const [problemsList, setProblemsList] = useState({});
   const [backupList, setBackupList] = useState({});
   const [loading, setLoading] = useState(true);
-
-  console.log('Renderizou')
-
+  const [collapser, setCollapser] = useState({});
 
   useEffect(() => {
     async function getRoutesEffect(){
@@ -40,7 +39,6 @@ function SearchProblems(){
         }
         setBackupList(problems)
         setProblemsList(problems);
-        console.log(problems)
         setLoading(false);
       }
     }
@@ -64,6 +62,10 @@ function SearchProblems(){
     }
 
     setProblemsList(filteredProblemsList);
+  }
+
+  function collapseSection(section){
+    setCollapser(prev => ({...prev, [section]: !prev[section]}))
   }
 
   async function downloadProblem(e, idProblem){
@@ -93,88 +95,107 @@ function SearchProblems(){
             <BsSearch />
             <input className={mavemPro.className} type="text" onChange={(e) => selectProblems(e.target.value)} placeholder="Digite o problema" />
           </div>
-          {/* <Link href={'problems/choice'}>
+          <Link href={'problems/choice'}>
             <SimpleButton type={'green'} icon={<IoIosAdd />} text="Adicionar Problema" onClick={() =>{console.log('oi')}} />
-          </Link> */}
+          </Link>
         </div>
         {
           problemsList?.problemsCreated?.length > 0 &&
 
           <div className={styles.problems_box}>
-            <div className={styles.title_type_problem_box}>
+            <div className={styles.title_type_problem_box} onClick={() => collapseSection('problemsCreated')}>
               <span>Problemas Adicionados</span>
               <div></div>
-              <IoIosArrowUp />
-            </div>
-            <div className={styles.problems_list}>
-              {
-                problemsList?.problemsCreated.map((item) =>{
-                  return(
-                    <Link prefetch={false} className={styles.card_problem} key={item.id} href={item.href}>
-                      <div>
-                        <div className={styles.card_title_box}>
-                          <h5>{item.name}</h5>
-                          <IoIosArrowForward />
-                        </div>
-                        <div className={styles.card_abouts_box}>
-                          <div className={styles.card_about_box}>
-                            <span>dimensão:</span>
-                            <span>{item.dimension}</span>
-                          </div>
-                          {item.restriction === true &&
-                            <div className={styles.card_about_box}>
-                              <span>restrição</span>
-                            </div>
-                          }
-                        </div>
-                      </div>
-                      <div className={styles.card_actions_box}>
-                        <IoMdTrash className={styles.trash} />
-                        <IoMdDownload onClick={(e) => downloadProblem(e, item.id)}/>
-                      </div>
-                    </Link>
-                  )
-                })
+              {!collapser.problemsCreated ? 
+                <IoIosArrowUp />
+              :
+                <IoIosArrowDown />
               }
             </div>
+            <AnimateHeight
+            duration={400}
+            height={!collapser.problemsCreated ? 'auto' : 0}
+            animateOpacity={true}>
+              <div className={styles.problems_list}>
+                {
+                  problemsList?.problemsCreated.map((item) =>{
+                    return(
+                      <Link prefetch={false} className={styles.card_problem} key={item.id} href={item.href}>
+                        <div>
+                          <div className={styles.card_title_box}>
+                            <h5>{item.name}</h5>
+                            <IoIosArrowForward />
+                          </div>
+                          <div className={styles.card_abouts_box}>
+                            <div className={styles.card_about_box}>
+                              <span>dimensão:</span>
+                              <span>{item.dimension}</span>
+                            </div>
+                            {item.restriction === true &&
+                              <div className={styles.card_about_box}>
+                                <span>restrição</span>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                        <div className={styles.card_actions_box}>
+                          <IoMdTrash className={styles.trash} />
+                          <IoMdDownload onClick={(e) => downloadProblem(e, item.id)}/>
+                        </div>
+                      </Link>
+                    )
+                  })
+                }
+              </div>
+            </AnimateHeight>
+            
           </div>
         }
         {loading === true ? 
           <ProblemsLoading />
         :
           <div className={styles.problems_box}>
-            <div className={styles.title_type_problem_box}>
+            <div className={styles.title_type_problem_box} onClick={() => collapseSection('problemsDefault')}>
               <span>Problemas Pré-Definidos</span>
               <div></div>
-              <IoIosArrowUp />
-            </div>
-            <div className={styles.problems_list}>
-              {
-                problemsList?.problemsDefault?.map((item) =>{
-                  return(
-                    <Link prefetch={false} className={styles.card_problem} key={item.name} href={item.href}>
-                      <div>
-                        <div className={styles.card_title_box}>
-                          <h5>{item.name}</h5>
-                          <IoIosArrowForward />
-                        </div>
-                        <div className={styles.card_abouts_box}>
-                          <div className={styles.card_about_box}>
-                            <span>dimensão:</span>
-                            <span>{item.dimension}</span>
-                          </div>
-                          {item.restriction === true &&
-                            <div className={styles.card_about_box}>
-                              <span>restrição</span>
-                            </div>
-                          }
-                        </div>
-                      </div>
-                    </Link>
-                  )
-                })
+              {!collapser.problemsDefault ? 
+                <IoIosArrowUp />
+              :
+                <IoIosArrowDown />
               }
             </div>
+            <AnimateHeight
+            duration={400}
+            height={!collapser.problemsDefault ? 'auto' : 0}
+            animateOpacity={true}>
+              <div className={styles.problems_list}>
+                {
+                  problemsList?.problemsDefault?.map((item) =>{
+                    return(
+                      <Link prefetch={false} className={styles.card_problem} key={item.name} href={item.href}>
+                        <div>
+                          <div className={styles.card_title_box}>
+                            <h5>{item.name}</h5>
+                            <IoIosArrowForward />
+                          </div>
+                          <div className={styles.card_abouts_box}>
+                            <div className={styles.card_about_box}>
+                              <span>dimensão:</span>
+                              <span>{item.dimension}</span>
+                            </div>
+                            {item.restriction === true &&
+                              <div className={styles.card_about_box}>
+                                <span>restrição</span>
+                              </div>
+                            }
+                          </div>
+                        </div>
+                      </Link>
+                    )
+                  })
+                }
+              </div>
+            </AnimateHeight>
           </div>
         }
       </div>

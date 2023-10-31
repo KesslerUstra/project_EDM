@@ -6,27 +6,25 @@ import StepperCount from '@/components/StepperCount';
 import BackButton from '@/components/Buttons/BackButton';
 import StepperConstructor from '@/components/StepperConstructor';
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import InputSimple from "@/components/Input/InputSimple";
 import InputLimits from "@/components/Input/InputLimits";
 import { runningAlgorithm } from "@/public/functions/edm/base";
 import { addConfgProblems } from '@/app/assets/confg_problems';
 import { v4 as uuidv4 } from 'uuid';
+import { animateScroll as scroll } from 'react-scroll';
 
 import { addNewRoute } from '@/app/assets/routes';
 import { cloneDeep } from 'lodash';
 
+
+const options = {
+    duration: 400,
+    smooth: true,
+};
+
 export default function CreateProblems() {
 
-    // const [data, setData] = useState({
-    //     "generations": 10,
-    //     "groups": 10,
-    //     "points": 12,
-    //     "stop": {
-    //         "genActive": true,
-    //         "genValue": 10
-    //     }
-    // });
     const [limits, setLimits] = useState({});
     const [functionProblem, setFunctionProblem] = useState(null);
     const [functionText, setFunctionText] = useState('');
@@ -40,6 +38,10 @@ export default function CreateProblems() {
 
     console.log(result)
     console.log(limits)
+
+    useEffect(() => {
+        scroll.scrollToTop(options);
+    }, [stepper])
 
     function setResultFunction(result){
         setResult(result);
@@ -92,16 +94,6 @@ export default function CreateProblems() {
             <h2 name="top" className={styles.title_page}>Construtor de Problema</h2>
             <StepperCount steps={3} stepActive={stepper}/>
             <StepperConstructor step={stepper} setStep={setStepper} data={data} setData={setData} sketch={sketch} setSketch={setSketch} finishFunction={finishCreateProblem}/>
-            
-            {/* <button onClick={() => setStepper(prev => prev+1)}>adicionar</button>
-            <button onClick={() => setStepper(prev => prev-1)}>remover</button>
-            <InputSimple value={data?.dimension?.value} letter={'n'} label={'Dimensão'} onChange={(e) => changeData('dimension', e.target.value)} type={'number'}/>
-            <InputLimits values={limits} dimesion={data?.dimension?.value} onChangeLimits={changeDataLimits} />
-            <input type="text" onChange={(e) => setFunctionText(e.target.value)} />
-            <button onClick={() => calculate()}>Criar Funcao</button>
-            <div>
-                <button onClick={() => run()}>Calcular</button>
-            </div> */}
         </div>
     )
 }

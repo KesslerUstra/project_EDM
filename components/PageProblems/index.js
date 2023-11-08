@@ -78,7 +78,7 @@ function PageProblems({confg = undefined, problemConfg = undefined}){
             <Loading />
         :
             <div className={styles.page_problem_box}>
-                <BackButton />
+                <BackButton activeClear={true} />
                 {problemSelect ?
                 <>
                     <h2 className={styles.title_problem}>{problemSelect.title}</h2>

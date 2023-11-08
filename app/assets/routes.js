@@ -60,5 +60,18 @@ export async function addNewRoute(newRoute) {
     const existingRoutes = await JSON.parse(localStorage.getItem('routes')) || routes;
     const updatedRoutes = [...existingRoutes, newRoute];
     localStorage.setItem('routes', JSON.stringify(updatedRoutes));
-    return updatedRoutes;
+    return;
+}
+
+export async function deleteRoute(idRoute) {
+    const existingRoutes = await JSON.parse(localStorage.getItem('routes')) || [];
+    const updatedRoutes = existingRoutes.filter(route => route.id !== idRoute);
+    if(existingRoutes.length !== updatedRoutes.length){
+        localStorage.setItem('routes', JSON.stringify(updatedRoutes));
+        console.log('deletou rota');
+        return true;
+    }else{
+        console.log('não deletou rota');
+        return false;
+    }
 }

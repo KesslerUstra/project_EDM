@@ -25,7 +25,7 @@ export default function ChoicePage(){
                     <Image priority={false} style={{objectFit: 'contain', width: '100%', height: '100%'}} src={createImage} alt='Imagem de fundo com polignos' />
                     </div>
                 </Link>
-                <Link href={''}  aria-disabled={true} className={styles.card_box} style={{'--color-card-stroke': 'var(--color-blue-4)' , pointerEvents: 'none'}}>
+                <Link href={'./import'} className={styles.card_box} style={{'--color-card-stroke': 'var(--color-blue-4)'}}>
                     <div>
                         <span className={styles.title_card}>
                             <span></span>

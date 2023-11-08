@@ -9,14 +9,11 @@ export function verifyValuesProblemCreate(step, data){
 
     defaultVerifications.map(e => {
         switch (e.name) {
-            case 'dimension':
-                if (defaultVerification(data?.data?.[e.name]?.value)) returnVerification[e.name] = true;
-                break;
             case 'default':
-                defaultValuesVerification(data[e.name], e.values, returnVerification);
+                defaultValuesVerification(data, e.values, returnVerification);
                 break;
             default:
-                if (defaultVerification(data[e.name], e.min ? e.min : 1, e.max ? e.max : undefined, e?.type)) returnVerification[e.name] = true;
+                if (defaultVerification(data.data[e.name], e.min ? e.min : 1, e.max ? e.max : undefined, e?.type)) returnVerification[e.name] = true;
                 break;
         }
     })
@@ -67,17 +64,17 @@ function defaultVerification(value, min = 1, max, type = 'number'){
 }
 
 function defaultValuesVerification(defaultValues, values, returnVerification){
-    if(!defaultValues.active) return;
+    if(!defaultValues.default.active) return;
     returnVerification.default = {};
     values.map((e) =>{
         if(e.name === 'stop'){
-            stopVerification(defaultValues?.data?.stop, returnVerification);
+            stopVerification(defaultValues.stop, returnVerification);
             return;
         }else if(e.name === 'limits'){
-            limitsVerification(defaultValues?.limits, defaultValues?.data?.dimension?.value, returnVerification);
+            limitsVerification(defaultValues.limits, defaultValues.data?.dimension, returnVerification);
             return;
         }
-        if(defaultVerification(defaultValues?.data?.[e.name], e.min, e.max)) returnVerification.default[e.name]= true;
+        if(defaultVerification(defaultValues.default?.[e.name], e.min, e.max)) returnVerification.default[e.name]= true;
     })
     if(Object.keys(returnVerification.default).length === 0) delete returnVerification.default;
 }
@@ -120,5 +117,11 @@ function stopVerification(stopValue, returnVerification){
         returnVerification.stop.diff = true;
     }
     if(Object.keys(returnVerification.stop).length === 0) delete returnVerification.stop;
+    return;
+}
+
+export function verifyUploadFile(data){
+    const verificationResult = verifyValuesProblemCreate('step_one', data);
+    console.log(verificationResult);
     return;
 }

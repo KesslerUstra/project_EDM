@@ -1,55 +1,53 @@
 "use client"
 
+import styles from './StepFunction.module.css';
+
 import { useState } from 'react';
-import styles from './StepTwo.module.css';
+import { validateFunction } from '@/public/functions/transformFunctions';
+import { verifyValuesProblemCreate } from '@/public/functions/verifyValues';
+import useProblemContext from '@/hooks/useProblemContext';
 
 import InputSimple from '../Input/InputSimple';
 import TitleSection from '../TitleSection';
 import SwitchButton from '../Buttons/SwitchButton';
 import StepperControls from '../StepperControls';
 
-import { validateFunction } from '@/public/functions/transformFunctions';
-import { verifyValuesProblemCreate } from '@/public/functions/verifyValues';
 
-
-export default function StepTwo({data, setData, sketch, setSketch, setStep}){
+export default function StepFunction({step = 0}){
 
     const [verifications, setVerifications] = useState({});
+    const {state, dispatch} = useProblemContext();
 
     function setObjectiveFunction(type, value){
-        setSketch(prev => ({...prev, [type]: value}));
+        dispatch({type: 'changeData', payload: {type: 'sketch', field: type, value: value}});
     }
 
     function createFunction() {
-        let verificationObjective = validateFunction(sketch?.objective, data?.data?.dimension?.value);
+        let verificationObjective = validateFunction(state.sketch?.objective, state.data?.dimension);
         setVerifications(prev => ({...prev, objective: verificationObjective }))
         if(verificationObjective.success === true){
-            setData(prev => ({...prev, 'objectiveFunction': {function: verificationObjective.funcao}}));
+            dispatch({type: 'changeData', payload: {type: 'data', field: 'objectiveFunction', value: state?.sketch['objective']}});
         }
     };
 
     function toggleRestricionsValues(value){
         return;
-        setData(prev => ({...prev, restrictions: { ...prev?.restrictions, active: value}}));
     }
 
     function controlStepper(direction){
-        console.log(direction)
         try {
             if(direction === 'prev'){
-                setStep(0);
+                dispatch({type: 'changeStep', payload: {value: step - 1}})
                 return;
             }
-            console.log(`teste`,verifications)
-            if(!verifications?.objective?.success && data?.objectiveFunction?.function === undefined){
+            if(!verifications?.objective?.success && state.data?.objectiveFunction === undefined){
                 setVerifications(prev => ({...prev, objective: {...prev?.objective, error: 'Função obrigátoria'}}))
                 return;
             };
-            let verificationsStep = verifyValuesProblemCreate('step_two', data);
+            let verificationsStep = verifyValuesProblemCreate('step_two', {});
             setVerifications(prev => ({...prev, verificationsStep}));
-            console.log(verificationsStep)
             if(Object.keys(verificationsStep).length !== 0 ) return;
-            setStep(2);
+            dispatch({type: 'changeStep', payload: {value: step + 1}})
         } catch (error) {
             console.error("Erro durante a execução do algoritmo:", error);
         }
@@ -59,7 +57,7 @@ export default function StepTwo({data, setData, sketch, setSketch, setStep}){
         <>
             <TitleSection title={'Função Objetivo'} />
             <div className={styles.confg_function_box}>
-                <InputSimple value={sketch?.objective} style={{maxWidth: '700px'}} label={'Função Objetivo'} onChange={(e) => setObjectiveFunction('objective', e.target.value)} type={'text'} verification={verifications.objective?.error} positive={verifications.objective?.success}/>
+                <InputSimple value={state.sketch?.objective} style={{maxWidth: '700px'}} label={'Função Objetivo'} onChange={(e) => setObjectiveFunction('objective', e.target.value)} type={'text'} verification={verifications.objective?.error} positive={verifications.objective?.success}/>
                 <span className={styles.error_message}>
                     {verifications.objective?.error != undefined &&
                         verifications.objective?.error
@@ -69,22 +67,22 @@ export default function StepTwo({data, setData, sketch, setSketch, setStep}){
             </div>
             <TitleSection title={'Restrições'} />
             <div style={{display: 'flex', justifyContent: 'center', paddingTop: '20px'}}>
-                <SwitchButton initial={data?.restrictions?.active} onChangeFunction={toggleRestricionsValues}/>
+                <SwitchButton initial={state.restrictions?.active} onChangeFunction={toggleRestricionsValues}/>
             </div>
-            <div className={styles.restriction_box} style={data?.restrictions?.active ? {} : {pointerEvents: 'none'}}>
+            <div className={styles.restriction_box} style={state.restrictions?.active ? {} : {pointerEvents: 'none'}}>
                 <div className={styles.restriction_type_box}>
                     <span>Variável</span>
                     <SwitchButton />
                     <span>Restrição</span>
                 </div>
-                <InputSimple disabled={!data?.restrictions?.active} label={'Nome Variável'} type={'text'}/>
-                <InputSimple disabled={!data?.restrictions?.active} style={{maxWidth: '700px'}} label={'Função'} onChange={(e) => changeData('dimension', e.target.value)} type={'text'}/>
+                <InputSimple disabled={!state.restrictions?.active} label={'Nome Variável'} type={'text'}/>
+                <InputSimple disabled={state.restrictions?.active} style={{maxWidth: '700px'}} label={'Função'} onChange={(e) => changeData('dimension', e.target.value)} type={'text'}/>
                 <button style={{width: 'fit-content', justifySelf: 'center'}} className={styles.button_add}>Adicionar</button>
                 <div className={styles.historic_restricions_box}>
                     <h5>Histórico</h5>
                 </div>
             </div>
-            <StepperControls step={1} onChangeStep={(e) => controlStepper(e)} />
+            <StepperControls step={step} onChangeStep={(e) => controlStepper(e)} />
         </>
     )
 }

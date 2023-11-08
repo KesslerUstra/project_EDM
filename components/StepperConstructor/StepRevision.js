@@ -1,17 +1,20 @@
-import React from "react";
-import StepperControls from "../StepperControls";
-import TitleSection from "../TitleSection";
-import styles from "./StepThree.module.css";
-import { addNewRoute } from "@/app/assets/routes";
-import { addConfgProblems } from "@/app/assets/confg_problems";
+import styles from "./StepRevision.module.css";
+
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
 import { useRouter } from "next/navigation";
+import { addConfgProblems } from "@/app/assets/confg_problems";
+import { addNewRoute } from "@/app/assets/routes";
+import useProblemContext from "@/hooks/useProblemContext";
+
+import StepperControls from "../StepperControls";
+import TitleSection from "../TitleSection";
 
 
-export default function StepThree({data, setData, sketch, setStep}){
+export default function StepRevision({step = 0}){
 
     const router = useRouter();
+    const {state, dispatch} = useProblemContext();
 
     function defaultValuesPrint(){
         return(
@@ -22,24 +25,24 @@ export default function StepThree({data, setData, sketch, setStep}){
                 <div className={styles.revision_column_box_2}>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_2}>Quantidade Subpopulação:</span>
-                        <span>{data?.default?.data?.groups}</span>
+                        <span>{state.default?.groups}</span>
                     </div>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_2}>Quantidade Indivíduos:</span>
-                        <span>{data?.default?.data?.points}</span>
+                        <span>{state.default?.points}</span>
                     </div>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_2}>Gerações por Loop:</span>
-                        <span>{data?.default?.data?.generations}</span>
+                        <span>{state.default?.generations}</span>
                     </div>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_2}>Limites:</span>
                     </div>
                     <div className={styles.revision_column_box_3}>
-                        {[...Array(data?.data?.dimension?.value).keys()].map( (e, i) => 
+                        {[...Array(state.data?.dimension).keys()].map( (e, i) => 
                             <div key={i} className={styles.revision_line_box}>
                                 <span className={styles.title_line_3}>x{i}:</span>
-                                <span>({data?.default?.limits?.[i]?.inferior_limit}, {data?.default?.limits?.[i]?.upper_limit})</span>
+                                <span>({state.limits?.[i]?.inferior_limit}, {state.limits?.[i]?.upper_limit})</span>
                             </div>
                         )}
                         
@@ -49,17 +52,17 @@ export default function StepThree({data, setData, sketch, setStep}){
                     </div>
                     <div className={styles.revision_column_box_3}>
                         {
-                            data?.default?.data?.stop?.genActive && 
+                            state.stop?.genActive && 
                             <div className={styles.revision_line_box}>
                                 <span className={styles.title_line_3}>Geração:</span>
-                                <span>{data?.default?.data?.stop?.genValue}</span>
+                                <span>{state.stop?.genValue}</span>
                             </div>
                         }
                         {
-                            data?.default?.data?.stop?.diffActive && 
+                            state.stop?.diffActive && 
                             <div className={styles.revision_line_box}>
                                 <span className={styles.title_line_3}>Diferença:</span>
-                                <span>{data?.default?.data?.stop?.diffValue}</span>
+                                <span>{state.stop?.diffValue}</span>
                             </div>
                         }
                     </div>
@@ -107,21 +110,21 @@ export default function StepThree({data, setData, sketch, setStep}){
     }
 
     async function controlStepper(direction){
-        console.log(direction)
         try {
             if(direction === 'prev'){
-                setStep(1);
+                dispatch({type: 'changeStep', payload: {value: step - 1}})
                 return;
             }
             
             const urlProblem = uuidv4();
-            const dataModify = cloneDeep(data);
-            dataModify.data.dimension.disabled = true;
-            console.log(dataModify)
+            let agroupProblem = {...state.data, default: {active: state.default?.active, data: {...state.default, stop: state.stop}, limits: state.limits}}
+            const dataModify = cloneDeep(agroupProblem);
+            delete dataModify.default.data.active;
+            console.log(dataModify);
             addNewRoute({
-                name: data.title,
+                name: state.data?.title,
                 href: `/problems/${urlProblem}`,
-                dimension: dataModify.data.dimension.value,
+                dimension: dataModify.data?.dimension,
                 restriction: false,
                 id: urlProblem
             })
@@ -139,23 +142,23 @@ export default function StepThree({data, setData, sketch, setStep}){
                 <div className={styles.revision_column_box_1}>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_1}>Nome Problema:</span>
-                        <span>{data?.title}</span>
+                        <span>{state.data?.title}</span>
                     </div>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_1}>Dimensão:</span>
-                        <span>{data?.data?.dimension?.value}</span>
+                        <span>{state.data?.dimension}</span>
                     </div>
-                    { data?.default?.active && defaultValuesPrint() }
+                    { state.default?.active && defaultValuesPrint() }
                 </div>
                 <div className={styles.revision_column_box_1}>
                     <div className={styles.revision_line_box}>
                         <span className={styles.title_line_1}>Função Objetivo:</span>
-                        <span>{sketch?.objective}</span>
+                        <span>{state.sketch?.objective}</span>
                     </div>
-                    { data?.restrictions?.active && restrictionsPrint() }
+                    { state.restrictions?.active && restrictionsPrint() }
                 </div>
             </div>
-            <StepperControls step={2} onChangeStep={controlStepper} finish={true} />
+            <StepperControls step={step} onChangeStep={controlStepper} finish={true} />
         </>
     )
 }

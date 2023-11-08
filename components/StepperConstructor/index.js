@@ -1,31 +1,59 @@
-import StepOne from "./StepOne";
-import StepTwo from "./StepTwo";
-import StepThree from "./StepThree";
-import StepperControls from "../StepperControls";
+import { StepperCount } from "../StepperCount";
+import useProblemContext from '@/hooks/useProblemContext';
+import StepOptions from "./StepOptions";
+import StepFunction from "./StepFunction";
+import StepRevision from "./StepRevision";
+import StepUploadFile from "./StepUploadFile";
 
-export default function StepperConstructor({step, setStep, data, setData, sketch, setSketch, finishFunction}){
+
+export function StepperCreate(){
+    const {stepActive} = useProblemContext().state;
+    
     return(
         <>
-        {
-            (() => {
-            switch (step) {
-                case 0:
-                    return (
-                        <StepOne data={data} setData={setData} setStep={setStep} />
-                    )
-                case 1:
-                    return (
-                        <StepTwo data={data} setData={setData} sketch={sketch} setSketch={setSketch} setStep={setStep} />
-                    )
-                case 2:
-                    return (
-                        <>
-                            <StepThree data={data} setData={setData} sketch={sketch} setStep={setStep} />
-                        </>
-                    )
+            <StepperCount steps={3} stepActive={stepActive} />
+            {
+                (() => {
+                switch (stepActive) {
+                    case 0:
+                        return (
+                            <StepOptions step={0} />
+                        )
+                    case 1:
+                        return (
+                            <StepFunction step={1} />
+                        )
+                    case 2:
+                        return (
+                            <StepRevision step={2} />
+                        )
+                }
+            })()
             }
-          })()
-        }
+        </>
+    );
+}
+
+export function StepperImport(){
+    const {stepActive} = useProblemContext().state;
+    
+    return(
+        <>
+            <StepperCount steps={2} stepActive={stepActive} />
+            {
+                (() => {
+                switch (stepActive) {
+                    case 0:
+                        return (
+                            <StepUploadFile step={0} />
+                        )
+                    case 1:
+                        return (
+                            <StepRevision step={1} />
+                        )
+                }
+            })()
+            }
         </>
     );
 }

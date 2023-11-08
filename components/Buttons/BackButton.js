@@ -5,15 +5,21 @@ import { useRouter } from 'next/navigation'
 import { TiArrowBackOutline, TiArrowBack } from "react-icons/ti";
 import styles from './BackButton.module.css'
 
-function BackButton(){
+function BackButton({activeClear = false, url = undefined}){
 
     const router = useRouter();
 
     function returnFunction(){
-        var x = setTimeout('alert("x");',200);
-        for (var i = 0; i <= x; i++)
-            clearTimeout(i);
-        router.back()
+        if(activeClear){
+            var x = setTimeout('alert("x");',200);
+            for (var i = 0; i <= x; i++)
+                clearTimeout(i);
+        }
+        if(url !== undefined){
+            router.push(url);
+        }else{
+            router.back()
+        }
     }
 
     return (

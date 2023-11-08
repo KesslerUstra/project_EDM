@@ -14,6 +14,8 @@ import SimpleButton from "../Buttons/SimpleButton";
 import BackButton from "../Buttons/BackButton";
 import ProblemsLoading from "../Loading/ProblemsLoading";
 import AnimateHeight from "react-animate-height";
+import { deleteConfgProblems } from "@/app/assets/confg_problems";
+import { deleteRoute } from "@/app/assets/routes";
 
 const mavemPro = Maven_Pro({ subsets: ['latin'] })
 
@@ -68,6 +70,23 @@ function SearchProblems(){
     setCollapser(prev => ({...prev, [section]: !prev[section]}))
   }
 
+  function deleteProblem(e, idProblem){
+    e.preventDefault();
+    deleteConfgProblems(idProblem);
+    const result = deleteRoute(idProblem);
+    if(result){
+      setProblemsList(prev => {
+        let returnRoutes = prev.problemsCreated.filter(route => route.id !== idProblem);
+        return {...prev, problemsCreated: returnRoutes};
+      })
+
+      setBackupList(prev => {
+        let returnRoutes = prev.problemsCreated.filter(route => route.id !== idProblem);
+        return {...prev, problemsCreated: returnRoutes};
+      })
+    }
+  }
+
   async function downloadProblem(e, idProblem){
     e.preventDefault();
     console.log(idProblem);
@@ -89,7 +108,7 @@ function SearchProblems(){
 
   return(
       <div className={styles.problems_list_box}>
-        <BackButton />
+        <BackButton url={'/'} />
         <div className={styles.options_box}>
           <div className={styles.search_problems_box}>
             <BsSearch />
@@ -139,7 +158,7 @@ function SearchProblems(){
                           </div>
                         </div>
                         <div className={styles.card_actions_box}>
-                          <IoMdTrash className={styles.trash} />
+                          <IoMdTrash className={styles.trash} onClick={(e) => deleteProblem(e, item.id)}/>
                           <IoMdDownload onClick={(e) => downloadProblem(e, item.id)}/>
                         </div>
                       </Link>

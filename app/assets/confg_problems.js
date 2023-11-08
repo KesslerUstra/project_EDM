@@ -16,6 +16,16 @@ export async function addConfgProblems(data, name){
     return;
 }
 
+export async function deleteConfgProblems(idProblem){
+    let Problems = await JSON.parse(localStorage.getItem('problems')) || {};
+    if(Problems?.[idProblem] !== undefined){
+        console.log('deletou problema');
+        delete Problems[idProblem];
+        localStorage.setItem('problems', JSON.stringify(Problems));
+    }
+    return;
+}
+
 export const problems = {
     "springs":{
         "title": "Problema das Molas",

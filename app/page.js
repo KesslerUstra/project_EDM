@@ -50,7 +50,7 @@ export default function Home() {
                 </div>
                 <div data-aos="fade-left" data-aos-delay="300" className={styles.text_section_box}>
                   <p>
-                    Este website é o resultado de um projeto de iniciação científica dedicado a simplificar a complexidade do Algoritmo de Evolução Diferencial Melhorada (EDM) para fins educacionais.
+                    Este website é o resultado de um projeto de iniciação científica dedicado ao ensino de otimização com o Algoritmo de Evolução Diferencial Melhorada (EDM) para fins educacionais.
                   </p>
                   <p>
                     Teste as soluções existentes e crie seus próprios testes. Desvende novas possibilidades, desafie-se e contribua para a evolução da ciência computacional!

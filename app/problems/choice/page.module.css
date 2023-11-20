@@ -16,6 +16,8 @@
 
 .cards_box{
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
@@ -96,6 +98,11 @@
 @media (max-width: 550px) {
     .choice_box > h2{
         font-size: 22px;
-        padding: 50px 0px 70px;
+        padding: 10px 0px;
+    }
+
+    .card_box{
+        width: 340px;
+        height: 140px;
     }
 }

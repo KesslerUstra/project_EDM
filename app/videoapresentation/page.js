@@ -8,6 +8,6 @@ export default function RedirectPage(){
   }, []);
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontSize: '26px', fontWeight: 'bold'}}>Em Breve</div>
+    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', fontSize: '26px', fontWeight: 'bold'}}>Aguarde o Redirecionamento</div>
   );
 };

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function RedirectPage(){
   useEffect(() => {
-    // window.location.href = 'https://www.youtube.com';
+    window.location.href = 'https://youtu.be/Eas2xc5dAn8';
   }, []);
 
   return (

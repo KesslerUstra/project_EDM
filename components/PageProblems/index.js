@@ -11,11 +11,11 @@ import { getConfgProblems } from '@/app/assets/confg_problems';
 import styles from './PageProblems.module.css';
 
 import { runningAlgorithm } from '@/public/functions/edm/base';
-import { verifyValuesConfiguration } from '@/public/functions/verifyValues';
+import { verifyArrays } from '@/public/functions/verification/verifyValues';
 
-function PageProblems({confg = undefined, problemConfg = undefined}){
+function PageProblems({confgId = undefined}){
 
-    console.log(confg, problemConfg)
+    console.log(confgId)
 
     const [problemSelect, setProblemSelect] = useState(null);
     const [data, setData] = useState({});
@@ -28,19 +28,18 @@ function PageProblems({confg = undefined, problemConfg = undefined}){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let problemData = confgProblemsJson[confg];
+                let problemData = confgProblemsJson[confgId];
                 if (problemData === undefined) {
-                    problemData = await getConfgProblems(confg);
+                    problemData = await getConfgProblems(confgId);
                 }
                 console.log(problemData)
                 setProblemSelect(problemData);
-                setData(problemData.data)
             } catch (error) {
                 console.error('Erro ao buscar dados do problema:', error);
             }
         };
         fetchData();
-    }, [confg]);
+    }, [confgId]);
 
     function setResultFunction(result){
         setLoading(false);
@@ -57,10 +56,12 @@ function PageProblems({confg = undefined, problemConfg = undefined}){
 
     async function run(){
         try {
-            let verification = verifyValuesConfiguration(data, limits, advanced);
+            console.log(data, limits, advanced, problemSelect?.dimension);
+            let verification = verifyArrays('verifications_run', {...data, dimension: problemSelect?.dimension, limits: limits, advanced: advanced});
             setVerifications(verification);
+            console.log(verification)
             if(Object.keys(verification).length !== 0 ) return;
-            await runningAlgorithm(problemSelect?.objectiveFunction? problemSelect?.objectiveFunction : confg, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {}, setResultFunction, loadingRunning);
+            await runningAlgorithm(problemSelect?.objectiveFunction? problemSelect?.objectiveFunction : confgId, problemSelect?.dimension, data, limits, advanced.active ? advanced : {}, problemSelect?.restrictions?.active ? problemSelect?.restrictions : {}, setResultFunction, loadingRunning);
         } catch (error) {
             setLoading(false);
             console.error("Erro durante a execução do algoritmo:", error);
@@ -87,10 +88,10 @@ function PageProblems({confg = undefined, problemConfg = undefined}){
                         <h4>Configurações</h4>
                         <div className={styles.stroke}></div>
                     </div>
-                    <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} confgAdvanced={advanced} setAdvanced={setAdvanced} verification={verifications} defaultValuesActive={problemSelect?.default?.active} />
+                    <ConfgProblems defaultFunction={defaultValues} confgData={data} setData={setData} confgLimits={limits} setLimits={setLimits} confgAdvanced={advanced} setAdvanced={setAdvanced} verification={verifications} problemFields={problemSelect} />
                     <div className={styles.button_run_box}>
                         
-                        <button style={loading ? {pointerEvents: 'none'} : {}} onClick={() => run()}>
+                        <button style={loading ? {pointerEvents: 'none'} : {}} onClick={run}>
                             {loading ?
                                 <>
                                     <div className={styles.running_button}>
@@ -108,7 +109,7 @@ function PageProblems({confg = undefined, problemConfg = undefined}){
                         <h4>Resultados</h4>
                         <div className={styles.stroke}></div>
                     </div>
-                    <ResultProblems generations={results} data={data} />
+                    <ResultProblems generations={results} data={data} dimension={problemSelect?.dimension}/>
                 </>
                 :
                     <>

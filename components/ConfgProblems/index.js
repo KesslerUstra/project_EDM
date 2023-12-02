@@ -9,9 +9,7 @@ import styles from "./ConfgProblems.module.css";
 import { HiDocument } from "react-icons/hi2";
 import AnimateHeight from 'react-animate-height';
 
-function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLimits, confgAdvanced, setAdvanced, verification, defaultValuesActive = undefined}){
-
-    console.log(confgData)
+function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLimits, confgAdvanced, setAdvanced, verification, problemFields = {}}){
 
     function changeData(type, value, flag){
         if(flag){
@@ -57,7 +55,7 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
                     </div>
                     <span>Opções Avançadas</span>
                 </div>
-                {defaultValuesActive !== false &&
+                {problemFields?.default?.active !== false &&
                     <div onClick={() => defaultFunction()} className={styles.button_default_values}>
                         <span>Valores Padrão</span>
                         <div><HiDocument /></div>
@@ -66,10 +64,10 @@ function ConfgProblems({defaultFunction, confgData, setData, confgLimits, setLim
                 
             </div>
             <div className={styles.confg_problem_box}>
-                <InputSimple verification={verification.dimension} value={confgData?.dimension?.value} disabled={confgData?.dimension?.disabled} letter={'n'} label={'Dimensão'} onChange={(e) => changeData('dimension', e.target.value, true)} type={'number'}/>
+                <InputSimple verification={verification.dimension} value={problemFields?.dimension} disabled={true} letter={'n'} label={'Dimensão'} onChange={(e) => changeData('dimension', e.target.value, true)} type={'number'}/>
                 <InputSimple verification={verification.groups} value={confgData?.groups} letter={'p'} label={'Quantidade Subpopulação'} onChange={(e) => changeData('groups', e.target.value)} type={'number'}/>
                 <InputSimple verification={verification.points} value={confgData?.points} letter={'m'} label={'Quantidade Indivíduos'} rule={'min: 4'} onChange={(e) => changeData('points', e.target.value)} type={'number'}/>
-                <InputLimits values={confgLimits} dimesion={confgData.dimension.value} onChangeLimits={changeDataLimits} verification={verification.limits} />
+                <InputLimits values={confgLimits} dimesion={problemFields.dimension} onChangeLimits={changeDataLimits} verification={verification.limits} />
                 <div style={{width: '100%', display: 'flex', alignItems: 'center', flexDirection: 'column'}}>
                     <InputSimple verification={verification.generations} value={confgData?.generations} letter={'Gmax'} label={'Gerações por Loop'} onChange={(e) => changeData('generations', e.target.value)} type={'number'}/>
                     <AnimateHeight

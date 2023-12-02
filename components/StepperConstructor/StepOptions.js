@@ -3,7 +3,7 @@
 import styles from './StepOptions.module.css';
 
 import { useState } from 'react';
-import { verifyValuesProblemCreate } from '@/public/functions/verifyValues';
+import { verifyArrays } from '@/public/functions/verification/verifyValues';
 import useProblemContext from '@/hooks/useProblemContext';
 
 import InputSimple from '../Input/InputSimple';
@@ -77,8 +77,9 @@ export default function StepOptions({step = 0}){
 
     function controlStepper(){
         try {
-            let verificationsStep = verifyValuesProblemCreate('step_one', {data: state.data, default: state.default, limits: state.limits, stop: state.stop});
+            let verificationsStep = verifyArrays('step_options', {...state.data, default: state.default, limits: state.limits, stop: state.stop});
             setVerifications(verificationsStep);
+            console.log(verificationsStep);
             if(Object.keys(verificationsStep).length !== 0 ) return;
             dispatch({type: 'changeStep', payload: {value: step + 1}})
         } catch (error) {
@@ -103,8 +104,8 @@ export default function StepOptions({step = 0}){
                 <InputSimple verification={verifications?.default?.groups} value={state.default?.groups} disabled={!state.default?.active} letter={'p'} label={'Quantidade Subpopulação'} onChange={(e) => changeDataDefault('groups', e.target.value)} type={'number'}/>
                 <InputSimple verification={verifications?.default?.points} value={state.default?.points} disabled={!state.default?.active} letter={'m'} label={'Quantidade Indivíduos'} rule={'min: 4'} onChange={(e) => changeDataDefault('points', e.target.value)} type={'number'}/>
                 <InputSimple verification={verifications?.default?.generations} value={state.default?.generations} disabled={!state.default?.active} letter={'Gmax'} label={'Gerações por Loop'} onChange={(e) => changeDataDefault('generations', e.target.value)} type={'number'}/>
-                <InputLimits verification={verifications?.limits} disabled={!state.default?.active} dimesion={state.data?.dimension} values={state.limits} onChangeLimits={changeLimitsDefault}/>
-                <InputStop verifications={verifications?.stop} stopConfg={state.stop} onChangeStop={changeStopDefault} disabled={!state.default?.active} />
+                <InputLimits verification={verifications?.default?.limits} disabled={!state.default?.active} dimesion={state.data?.dimension} values={state.limits} onChangeLimits={changeLimitsDefault}/>
+                <InputStop verifications={verifications?.default?.stop} stopConfg={state.stop} onChangeStop={changeStopDefault} disabled={!state.default?.active} />
             </div>
             <StepperControls step={step} onChangeStep={(e) => controlStepper(e)} />
         </>

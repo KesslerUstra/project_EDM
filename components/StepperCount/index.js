@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './StepperCount.module.css';
 
 import { animateScroll as scroll } from "react-scroll";
@@ -12,7 +14,6 @@ const options = {
 function StepperCountComponent({steps = 0, stepActive = 0}){
 
     useEffect(() => {
-        console.log('subiu')
         scroll.scrollToTop(options);
     }, [stepActive]);
 
@@ -24,7 +25,6 @@ function StepperCountComponent({steps = 0, stepActive = 0}){
                         <div className={e > stepActive ? '' : styles.active}></div>
                     }
                     <span className={e > stepActive ? '' : styles.active}>{e+1}</span>
-                    
                 </Fragment>
             ))}
         </div>

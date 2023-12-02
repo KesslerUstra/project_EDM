@@ -122,9 +122,9 @@ export default function StepRevision({step = 0}){
             delete dataModify.default.data.active;
             console.log(dataModify);
             addNewRoute({
-                name: state.data?.title,
+                name: dataModify?.title,
                 href: `/problems/${urlProblem}`,
-                dimension: dataModify.data?.dimension,
+                dimension: dataModify?.dimension,
                 restriction: false,
                 id: urlProblem
             })

@@ -10,7 +10,7 @@ import StepperControls from '../StepperControls';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { LuFileJson } from 'react-icons/lu';
 import { IoMdTrash } from 'react-icons/io';
-import { verifyUploadFile } from '@/public/functions/verifyValues';
+import { verifyUploadFile } from '@/public/functions/verification/verifyValues';
 
 
 export default function StepUploadFile({step}){

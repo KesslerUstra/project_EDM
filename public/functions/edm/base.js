@@ -2,12 +2,12 @@ import {orderSliceArray, createPopulation} from './population';
 import { sampleSize, cloneDeep } from 'lodash';
 import { executeFunctionAlgorithm } from './resultFunction';
 
-export async function runningAlgorithm(nameProblem, data, limits, advanced = {}, restrictions = {}, endFn, loadingFn, maxTimePerChunk) {
+export async function runningAlgorithm(nameProblem, dimension, data, limits, advanced = {}, restrictions = {}, endFn, loadingFn, maxTimePerChunk) {
   maxTimePerChunk = maxTimePerChunk || 200;
   let results = [];
   let variablesController = {gen: 1, repeat: 5, lastBest: null}
   let best;
-  let newPop = createPopulation(nameProblem, data, limits, restrictions);
+  let newPop = createPopulation(nameProblem, dimension, data, limits, restrictions);
   newPop = orderSliceArray(false, newPop, data.points);
 
   function now() {

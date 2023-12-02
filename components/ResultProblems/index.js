@@ -2,7 +2,7 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, PointElement, Tooltip } from "chart.js";
 import styles from './ResultProblems.module.css';
 import { useMemo } from "react";
-import { calcularDesvioPadrao } from "@/public/functions/resultValues";
+import { calcularDesvioPadrao } from "@/public/functions/edm/resultValues";
 
 ChartJS.register(
     LineElement,
@@ -12,7 +12,7 @@ ChartJS.register(
     Tooltip
 )
 
-function ResultProblems({generations = [], data= {}}){
+function ResultProblems({generations = [], data= {}, dimension = 0}){
 
     const data2 = {
         labels: [...Array(generations.length).keys()].map(number => number + 1),
@@ -70,7 +70,7 @@ function ResultProblems({generations = [], data= {}}){
                             <span className={styles.variable_best_point}>f()</span>
                             <span className={styles.result_best_point}>{bestPoint?.result.toFixed(4)}</span>
                         </div>
-                        {[...Array(data.dimension.value).keys()].map((e) => (
+                        {[...Array(dimension).keys()].map((e) => (
                             <div key={e} className={styles.children_box_best_point}>
                                 <span className={styles.variable_best_point}>{`x${e+1}`}</span>
                                 <span className={styles.x_best_point}>{bestPoint?.[e]}</span>

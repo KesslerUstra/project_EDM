@@ -4,6 +4,6 @@ import PageProblems from '@/components/PageProblems';
 
 export default function HomeProblems({params}) {
   return (
-    <PageProblems confg={params.problemHeader} />
+    <PageProblems confgId={params.problemHeader} />
   )
 }

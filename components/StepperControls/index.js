@@ -1,5 +1,4 @@
 import styles from './StepperControls.module.css';
-import { animateScroll } from 'react-scroll';
 
 import { MdKeyboardDoubleArrowRight, MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
@@ -9,7 +8,6 @@ export default function StepperControls({step, onChangeStep, finish= false}){
         onChangeStep(choice);
     }
     
-
     return(
         <div style={{display: 'flex', gap: '4px', padding: '80px 10px 40px'}}>
             {step > 0 &&

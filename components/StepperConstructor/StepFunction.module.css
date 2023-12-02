@@ -59,6 +59,8 @@
 }
 
 .restriction_type_box > span{
+    color: var(--color-text-4);
+    transition: color 200ms;
     font-weight: 600;
     font-size: 13px;
 }

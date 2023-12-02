@@ -1,3 +1,5 @@
+'use client'
+
 import { StepperCount } from "../StepperCount";
 import useProblemContext from '@/hooks/useProblemContext';
 import StepOptions from "./StepOptions";

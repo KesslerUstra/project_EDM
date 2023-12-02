@@ -29,12 +29,10 @@ export async function deleteConfgProblems(idProblem){
 export const problems = {
     "springs":{
         "title": "Problema das Molas",
-        "data": {
-            "dimension": {"value": 2, "disabled": true}
-        },
+        "dimension" : 2,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 2, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -57,12 +55,10 @@ export const problems = {
     },
     "pendulum":{
         "title": "Problema do Pêndulo",
-        "data": {
-            "dimension": {"value": 1, "disabled": true}
-        },
+        "dimension" : 1,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 1, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -81,12 +77,10 @@ export const problems = {
     },
     "flagpole":{
         "title": "Projeto de um Mastro de Bandeira",
-        "data": {
-            "dimension": {"value": 2, "disabled": true}
-        },
+        "dimension" : 2,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 2, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -125,12 +119,10 @@ export const problems = {
     },
     "steeltransport":{
         "title": "Problema Transporte de Aço",
-        "data": {
-            "dimension": {"value": 6, "disabled": true}
-        },
+        "dimension" : 6,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 6, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -191,12 +183,10 @@ export const problems = {
     },
     "farmer":{
         "title": "Problema do Fazendeiro",
-        "data": {
-            "dimension": {"value": 3, "disabled": true}
-        },
+        "dimension" : 3,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 3, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -232,12 +222,10 @@ export const problems = {
     },
     "pressure":{
         "title": "Problema Recipiente de Pressão",
-        "data": {
-            "dimension": {"value": 4, "disabled": true}
-        },
+        "dimension" : 4,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 4, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,
@@ -279,12 +267,10 @@ export const problems = {
     },
     "beam":{
         "title": "Problema Viga Engastada",
-        "data": {
-            "dimension": {"value": 4, "disabled": true}
-        },
+        "dimension" : 4,
+        "data": {},
         "default": {
             "data": {
-                "dimension": {"value": 4, "disabled": true},
                 "generations": 10,
                 "groups": 10,
                 "points": 12,

@@ -1,3 +1,5 @@
+'use client'
+
 import { createContext, useReducer } from "react";
 import { cloneDeep } from "lodash";
 
@@ -37,8 +39,8 @@ export function ProblemProvider({children}){
         stop: {},
         sketch: {},
         limits: {},
-        restricions: {},
-        stepActive: 0
+        restrictions: {},
+        stepActive: 1
     })
     return(
         <ProblemContext.Provider value={{state, dispatch}}>

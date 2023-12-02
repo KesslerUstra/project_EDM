@@ -1,15 +1,28 @@
 export function validateFunction(funcao, dimension){
 
-    console.log('teste', funcao, dimension)
-
     if (typeof funcao !== 'string') {
         return { error: 'A entrada não é uma função.' };
     }
 
     const variaveisEncontradas = funcao.match(/x(\d+)/g);
-    console.log(`teste`,variaveisEncontradas)
     if (!variaveisEncontradas) {
         return { error: 'A função não contém variáveis.' };
+    }
+
+    let count = 0;
+    for (const char of funcao) {
+        if (char === '(') {
+            count++;
+        } else if (char === ')') {
+            count--;
+            if (count < 0) {
+                return { error: 'A função possui mais parênteses de fechamento do que de abertura' };
+            }
+        }
+    }
+
+    if(count !== 0){
+        return { error: 'A função com número de parênteses de abertura e fechamento diferentes' };
     }
 
     const variaveisUnicas = [...new Set(variaveisEncontradas)];
@@ -29,10 +42,10 @@ export function validateFunction(funcao, dimension){
         return { error: `A função contém variáveis além da dimensão escolhida.` };
     }
 
-    const funcaoSubstituida = variaveisUnicas.reduce((funcao, variavel) => {
-        const indice = Number(variavel.slice(1)) - 1;
-        return funcao.replace(new RegExp(variavel, 'g'), `data[${indice}]`);
-    }, funcao);
+    // const funcaoSubstituida = variaveisUnicas.reduce((funcao, variavel) => {
+    //     const indice = Number(variavel.slice(1)) - 1;
+    //     return funcao.replace(new RegExp(variavel, 'g'), `data[${indice}]`);
+    // }, funcao);
 
-    return { success: true, funcao: funcaoSubstituida };
+    return { success: true, functionFinal: funcao };
 }

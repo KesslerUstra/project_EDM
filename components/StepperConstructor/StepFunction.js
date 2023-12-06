@@ -11,6 +11,7 @@ import InputSimple from '../Input/InputSimple';
 import TitleSection from '../TitleSection';
 import SwitchButton from '../Buttons/SwitchButton';
 import StepperControls from '../StepperControls';
+import DrawerProblem from '../Drawer/DrawerProblem';
 
 
 export default function StepFunction({step = 0}){
@@ -39,6 +40,11 @@ export default function StepFunction({step = 0}){
             return;
         }
         dispatch({type: 'toggleActive', payload: {type: 'restrictions', value: value}});
+    }
+
+    function createRestricion(){
+        state.data?.restrictions
+        let verificationRestriction = validateFunction(state.sketch?.objective, state.data?.dimension);
     }
 
     function controlStepper(direction){
@@ -84,12 +90,13 @@ export default function StepFunction({step = 0}){
                 </div>
                 <InputSimple value={state.sketch?.variableName} disabled={!state.restrictions?.active || !variable} label={'Nome Variável'} type={'text'} onChange={(e) => setSketchFunction('variableName', e.target.value)} />
                 <InputSimple value={state.sketch?.restricionFunction} disabled={!state.restrictions?.active} style={{maxWidth: '700px'}} label={'Função'} onChange={(e) => setSketchFunction('restricionFunction', e.target.value)} type={'text'}/>
-                <button style={{width: 'fit-content', justifySelf: 'center', pointerEvents: state.restrictions?.active ? 'auto' : 'none'}} className={styles.button_add}>Adicionar</button>
+                <button style={{width: 'fit-content', justifySelf: 'center', pointerEvents: state.restrictions?.active ? 'auto' : 'none'}} className={styles.button_add} onClick={createRestricion}>Adicionar</button>
                 <div className={styles.historic_restricions_box}>
                     <h5>Histórico</h5>
                 </div>
             </div>
             <StepperControls step={step} onChangeStep={(e) => controlStepper(e)} />
+            <DrawerProblem></DrawerProblem>
         </>
     )
 }
